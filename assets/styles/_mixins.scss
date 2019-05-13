@@ -1,0 +1,26 @@
+// Center a div
+@mixin centerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin flexCenterX {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flexCenterY {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flexCenter {
+  @include flexCenterX;
+  align-items: center;
+}
+@mixin clearFix {
+  content: '';
+  display: table;
+  clear: both;
+}
