@@ -6,12 +6,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser')
 const winston = require('winston')
 const cookieParser = require('cookie-parser')
+// Import route files
 const categoryRoutes = require('./routes/categoryRoutes')
 const fasciaRoutes = require('./routes/fasciaRoutes')
+const templateRoutes = require('./routes/templateRoutes')
 
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
-
+// Middlewares neccesary to parse income bodies and headers
 app.use(bodyParser.json({ type: '*/*', limit: '20mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
@@ -19,7 +21,7 @@ app.use(cors());
 app.use(compression());
 
 app.use(cookieParser());
-
+// Connect to mongodb 
 mongoose.connect('mongodb+srv://soulsako:oracledc55@email-builder-nuxt-k9n88.mongodb.net/email-builder-v3', {useNewUrlParser: true})
 const db = mongoose.connection;
 db.on('error', () => {
@@ -45,8 +47,9 @@ app.use((req, res, next) => {
   next();
 });
 // All Routes 
-app.use('/api', categoryRoutes);
-app.use('/api', fasciaRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/fascias', fasciaRoutes);
+app.use('/api/templates', templateRoutes);
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')

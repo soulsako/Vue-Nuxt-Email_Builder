@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const fasciasTemplatesSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   fascia_id: String,
+  components: Array,
   header_html: String,
   footer_html: String,
   category: String,
@@ -23,4 +24,4 @@ const fasciasTemplatesSchema = mongoose.Schema({
   createdBy: String,
   createdOn: { type: Date, default: Date.now },
 }, { versionKey: false });
-module.exports = mongoose.model('fasciasTemplates', fasciasTemplatesSchema);
+module.exports = mongoose.model('templates', fasciasTemplatesSchema);

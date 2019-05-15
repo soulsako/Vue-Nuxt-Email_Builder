@@ -49,18 +49,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { VCard, VImg, VCardTitle, VBtn, VApp } from 'vuetify/lib';
   
 export default {
   name: 'homePage',
-    components: {
-      VCard,
-      VImg,
-      VCardTitle
-    },
     data(){
       return {
-        buttonCounter: 0
+        buttonCounter: 0, 
+        fasciaId: ''
       }
     },
     computed: {
@@ -72,10 +67,13 @@ export default {
     methods: {
       cardClicked(data){
        this.buttonCounter++
+       if(data.type === 'fascia'){
+         this.fasciaId = data.id;
+       }
        this.$store.commit('setSelected', data);
       }, 
       navigateForward(){
-        this.$router.push('/selecttemplate')
+        this.$router.push('/templatelist/' + this.fasciaId);
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    Select template
+
   </div>
 </template>
 

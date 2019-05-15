@@ -1,0 +1,84 @@
+[
+  {
+    "_component": "headerImage",
+    "content": {
+      "image": "https://i8.amplience.net/i/jpl/mens-banner-84c27b007331dd3906d9d38fffdbef39",
+      "buttons": [
+        {
+          "cta": "SHOP NOW",
+          "url": "https://www.jdsports.co.uk/",
+          "invert":false
+        }
+      ],
+      "sale": false
+    }
+  },
+  {
+    "_component": "plu",
+    "content": {
+      "singlecolumn":true,
+      "doublecolumn":false,
+
+      "apparel":true,
+      "apparelLeft":false,
+      "footwear":false,
+
+      "fulllength":false,
+      "postcard":false,
+
+      "pluDetails": {
+        "plu": {
+            "image":"https://i8.amplience.net/i/jpl/men-rightplu-e87a66499d2a4a7e462d289b7a734d68",
+            "brand":"Brand",
+            "description":"Product description",
+            "price":"100.00",
+            "sale": false,
+            "exclusive": true
+        } 
+      }
+    }
+  },
+  {
+    "_component": "pluDouble",
+    "content": {
+      "singlecolumn":false,
+      "doublecolumn":true,
+
+      "apparel":true,
+      "footwear":false,
+
+      "fulllength":false,
+      "postcard":false,
+
+      "pluDetails": [{
+        "plu": {
+            "image":"https://i8.amplience.net/t/jpl/jd_product_list?plu=jd_140351_a&qlt=80&wid=270&hei=345",
+            "brand":"adidas Originals",
+            "description":"Itasca Crew Sweatshirt",
+            "price":"55.00",
+            "sale": false,
+            "exclusive": false
+          }
+      },
+      {
+        "plu": {
+            "image":"https://i8.amplience.net/t/jpl/jd_product_list?plu=jd_113521_a&qlt=80&w=270&h=345&v=1",
+            "brand":"Berghaus",
+            "description":"Large Logo T-Shirt",
+            "price":"25.00",
+            "sale": false,
+            "exclusive": true
+          }
+      }
+      ]
+    }
+  },
+  {
+    "_component": "textAndCta",
+    "content": {
+        "heading":"MEN'S",
+        "cta": "SHOP NOW", 
+        "url": "https://www.jdsports.co.uk/"
+    }
+  }
+]
