@@ -1,7 +1,6 @@
 <template>
-<VApp>
   <div class='flex'>
-    <div class='container'>
+    <div class='box_container'>
       <BaseHeading>Select Fascia</BaseHeading>
       <div class='grid'>
         <v-card 
@@ -26,7 +25,7 @@
            @click="navigateForward">Next</v-btn>
     
 
-  <div class='container'>
+  <div class='box_container'>
     <BaseHeading>Select Category</BaseHeading>
       <div class='grid'>
         <v-card class='card' 
@@ -43,8 +42,6 @@
       </div>
     </div>
   </div>
-</VApp>
-
 </template>
 
 <script>
@@ -52,6 +49,7 @@ import { mapGetters } from 'vuex';
   
 export default {
   name: 'homePage',
+  
     data(){
       return {
         buttonCounter: 0, 
@@ -88,7 +86,7 @@ export default {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     grid-gap: 2rem;
   }
-  .container {
+  .box_container {
     width: 50vw;
     margin: 3rem;
   }
