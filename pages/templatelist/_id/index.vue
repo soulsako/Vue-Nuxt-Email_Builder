@@ -45,7 +45,7 @@ import TextAndCta from '@/components/TemplateComponents/textandcta.vue'
         // [['plu', 'pluDouble'], ['plu', 'pluDouble'], ['plu', 'pluDouble']]
         const componentsFromDatabase = this.templates.map(curr => {
           curr.components.forEach(component => {
-            
+
           }) 
         });
       }
