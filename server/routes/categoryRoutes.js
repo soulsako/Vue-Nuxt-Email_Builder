@@ -9,6 +9,7 @@ router.get('/:id', (req, res) => {
   operation.exec().then((doc) => {
     res.send(doc)
   })
+  .catch(error => console.log(error));
 });
 
 module.exports = router;

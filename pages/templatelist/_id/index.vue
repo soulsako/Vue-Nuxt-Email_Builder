@@ -1,10 +1,13 @@
 <template>
   <div class="grid">
-    <div v-for="template in templates" :key="template._id" class="templates">
-      <components
-        v-for="(component, index) in template.components"
+    <div v-for="(template, index) in templatesData" :key="index" class="templates">
+      <component
+        v-for="(component, index) in template"
         :key="index"
-        :is="componentsData[component]"
+        :is="componentsObj[component._component]"
+        v-bind="component.content"
+        country="gb"
+        exclusiveCategory="men"
       />
     </div>
   </div>
@@ -12,7 +15,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import componentsData from '@/components.json'
+import configData from '@/components.json'
 import Plu from '@/components/TemplateComponents/plu.vue'
 import PluDouble from '@/components/TemplateComponents/pludouble.vue'
 import HeaderImage from '@/components/TemplateComponents/headerimage.vue'
@@ -28,8 +31,15 @@ import TextAndCta from '@/components/TemplateComponents/textandcta.vue'
     },
     data(){
       return {
+        componentsObj: {
+          Plu, 
+          PluDouble, 
+          HeaderImage, 
+          TextAndCta
+        },
         templates: [], 
-        componentsData: componentsData
+        templatesData: [], 
+        componentsJsonData: configData
       }
     }, 
     created(){
@@ -37,18 +47,20 @@ import TextAndCta from '@/components/TemplateComponents/textandcta.vue'
       this.$axios.$get('/api/templates/fascia/' + this.$route.params.id)
       .then(templates => {
         this.templates = templates;
+        const componentsArray = this.templates.map(template => template.components)
+        const componentsData = componentsArray.map(curr => {
+          let arr = [];
+          curr.forEach(comp => {
+              this.componentsJsonData.forEach(currComponent => {
+              if(currComponent._component === comp){
+                arr.push(currComponent);
+              }
+            })
+          })
+          return arr;
+        })
+        this.templatesData = componentsData;
       })
-    }, 
-    computed: {
-      createComponentJsonData(){
-        // Array which holds components array for all templates
-        // [['plu', 'pluDouble'], ['plu', 'pluDouble'], ['plu', 'pluDouble']]
-        const componentsFromDatabase = this.templates.map(curr => {
-          curr.components.forEach(component => {
-
-          }) 
-        });
-      }
     }
   }
 </script>

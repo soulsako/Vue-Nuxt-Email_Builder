@@ -44,7 +44,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify', 
-    '~/plugins/core-components.js'
+    '@/plugins/core-components.js'
   ],
 
   /*
