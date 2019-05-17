@@ -6,7 +6,7 @@
     dark
     v-model="drawer"
     >
-      <v-list>
+    <v-list>
         <v-list-tile v-for="(item, index) in items" 
                     :key='index'
                     :to="item.to"

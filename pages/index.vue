@@ -43,14 +43,23 @@
     </v-stepper-content>
 
     <v-stepper-content step="2">
-
-      <v-card class='app__card mb-5' 
-              v-for='category in getCategories' 
-              :key='category._id'
+      <v-container px-0 py-4 fluid grid-list-lg>
+        <v-layout app wrap justify-center>
+          <v-flex lg4 v-for='category in getCategories' :key='category._id'>
+            <v-card class='app__card mb-5' 
               @click="cardClicked({id: category._id, type: 'category'})"
               :dark='category.isSelected'>
-          <v-card-title>{{ category.category_name }}</v-card-title>
-      </v-card>
+              <v-img
+              class="app__img"
+              aspect-ratio="1"
+              :style="{'background-image': 'url(' + require(`../assets/images/${category.background_image}`) + ')'}"
+              >
+              </v-img>
+              <v-title></v-title>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
       <v-btn color="primary" @click="e1 = 3">Continue</v-btn>
       <v-btn color="error" @click="e1 = 1">Back</v-btn>
     </v-stepper-content>
@@ -100,6 +109,11 @@ export default {
     &:hover {
       opacity: .7;
     }
+  }
+  .app__img {
+    background-size: cover;
+    background-position: center;
+    opacity: .4;
   }
 </style>
 
