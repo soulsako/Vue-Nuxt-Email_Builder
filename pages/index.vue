@@ -48,14 +48,18 @@
           <v-flex lg4 v-for='category in getCategories' :key='category._id'>
             <v-card class='app__card mb-5' 
               @click="cardClicked({id: category._id, type: 'category'})"
-              :dark='category.isSelected'>
+              :raised="category.isSelected"
+              hover>
               <v-img
               class="app__img"
               aspect-ratio="1"
+              gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
               :style="{'background-image': 'url(' + require(`../assets/images/${category.background_image}`) + ')'}"
               >
               </v-img>
-              <v-title></v-title>
+              <v-card-title primary-title class="app__card-title text-uppercase">
+                <h3 class="display-1 white--text">{{ category.category_name }}</h3>
+              </v-card-title>
             </v-card>
           </v-flex>
         </v-layout>
@@ -84,8 +88,7 @@ export default {
   
     data(){
       return {
-        e1: 1,
-        fasciaId: ''
+        e1: 1
       }
     },
     computed: {
@@ -98,22 +101,46 @@ export default {
       cardClicked(data){
        this.$store.commit('setSelected', data);
       }
-    }
+    }, 
+    // created(){
+    //   //Query the templates collection in database and retreive all templates with this.getFasciaId id
+    //   this.$axios.$get('/api/templates/fascia/' + this.$route.params.id)
+    //   .then(templates => {
+    //     this.templates = templates;
+    //     const componentsArray = this.templates.map(template => template.components)
+    //     const componentsData = componentsArray.map(curr => {
+    //       let arr = {};
+    //       curr.forEach(comp => {
+    //           this.componentsJsonData.forEach(currComponent => {
+    //           if(currComponent._component === comp.name){
+    //            arr.sale = comp.sale;
+    //            arr.woman = comp.woman;
+    //           }else if(currComponent._component === comp.name && comp.name === '')
+    //         })
+    //       })
+    //       return {...arr, ...currComponent};
+    //     })
+    //     this.templatesData = componentsData;
+    //   })
+    // }
   }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
   .app__card {
     cursor: pointer;
     transition: all .2s;
     &:hover {
       opacity: .7;
     }
+    &-title {
+      @include centerText;
+      background-image: linear-gradient(to right bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75));
+    }
   }
   .app__img {
     background-size: cover;
     background-position: center;
-    opacity: .4;
   }
 </style>
 

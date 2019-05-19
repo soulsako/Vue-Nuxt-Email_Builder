@@ -1,4 +1,4 @@
-const currency = {
+export default {
   gb: '£',
   ie: '€',
   au: '$',
@@ -8,5 +8,3 @@ const currency = {
   my: 'MYR',
   sg: 'SGD',
 }
-
-export default currency;
