@@ -1,10 +1,10 @@
 <template>
   <div class="headerimage" :style="{backgroundImage: 'url('+ src +')'}">
-    <AppButton
+    <BaseButton
     :color="color"
     :background="background"
     class="app__button"
-    >shop now</AppButton>
+    >shop now</BaseButton>
   </div>
 </template>
 

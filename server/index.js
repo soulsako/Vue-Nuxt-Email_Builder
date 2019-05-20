@@ -50,7 +50,6 @@ app.use((req, res, next) => {
 app.use('/api/categories', categoryRoutes);
 app.use('/api/fascias', fasciaRoutes);
 app.use('/api/templates', templateRoutes);
-
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')

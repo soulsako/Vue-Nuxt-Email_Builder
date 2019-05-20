@@ -15,7 +15,7 @@
   </v-stepper-header>
 
   <v-stepper-items>
-
+    <!-- SELECT FASCIA -->
     <v-stepper-content class="pt-1" step="1">
       <v-card class="mb-5">
         <v-container px-0 py-4 fluid grid-list-lg>
@@ -41,14 +41,13 @@
       </v-card>
       <v-btn color="primary" @click="e1 = 2">Continue</v-btn>
     </v-stepper-content>
-
+    <!-- SELECT CATEGORY -->
     <v-stepper-content step="2">
       <v-container px-0 py-4 fluid grid-list-lg>
         <v-layout app wrap justify-center>
           <v-flex lg4 v-for='category in getCategories' :key='category._id'>
             <v-card class='app__card mb-5' 
               @click="cardClicked({id: category._id, type: 'category'})"
-              :raised="category.isSelected"
               hover>
               <v-img
               class="app__img"
@@ -67,10 +66,17 @@
       <v-btn color="primary" @click="e1 = 3">Continue</v-btn>
       <v-btn color="error" @click="e1 = 1">Back</v-btn>
     </v-stepper-content>
-
+    <!-- SELECT TEMPLATE TYPE -->
     <v-stepper-content step="3">
-      <v-card height="200px" color="grey lighten-1" class="mb-5">
-      </v-card>
+      <v-container fluid grid-list-lg>
+        <v-layout app wrap>
+          <v-flex lg4 v-for="type in templateType" :key="type">
+            <v-card class="mb-5 app__card" @click="nextStep(type.toLowerCase())">
+              <v-card-title>{{ type }}</v-card-title>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
       <v-btn color="primary" @click="e1 = 1">Continue</v-btn>
       <v-btn color="error" @click="e1 = 2">Back</v-btn>
     </v-stepper-content>
@@ -88,7 +94,8 @@ export default {
   
     data(){
       return {
-        e1: 1
+        e1: 1, 
+        templateType: ['Product', 'Sale', 'Launch']
       }
     },
     computed: {
@@ -100,29 +107,12 @@ export default {
     methods: {
       cardClicked(data){
        this.$store.commit('setSelected', data);
+      }, 
+      nextStep(data) {
+        this.$store.commit('setSelected', data);
+        this.$router.push('/templatelist');
       }
-    }, 
-    // created(){
-    //   //Query the templates collection in database and retreive all templates with this.getFasciaId id
-    //   this.$axios.$get('/api/templates/fascia/' + this.$route.params.id)
-    //   .then(templates => {
-    //     this.templates = templates;
-    //     const componentsArray = this.templates.map(template => template.components)
-    //     const componentsData = componentsArray.map(curr => {
-    //       let arr = {};
-    //       curr.forEach(comp => {
-    //           this.componentsJsonData.forEach(currComponent => {
-    //           if(currComponent._component === comp.name){
-    //            arr.sale = comp.sale;
-    //            arr.woman = comp.woman;
-    //           }else if(currComponent._component === comp.name && comp.name === '')
-    //         })
-    //       })
-    //       return {...arr, ...currComponent};
-    //     })
-    //     this.templatesData = componentsData;
-    //   })
-    // }
+    }
   }
 </script>
 
@@ -135,7 +125,6 @@ export default {
     }
     &-title {
       @include centerText;
-      background-image: linear-gradient(to right bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75));
     }
   }
   .app__img {

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-const rolesSchema = mongoose.Schema({
+const menTemplatesSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  roleId: Number,
-  roleName: String,
+  template_type: String,
+  template1: Object,
   status: String,
-  createdBy: String,
   createdOn: { type: Date, default: Date.now },
 }, { versionKey: false });
 
-module.exports = mongoose.model('roles', rolesSchema);
+module.exports = mongoose.model('mentemplates', menTemplatesSchema);

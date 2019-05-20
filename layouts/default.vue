@@ -26,9 +26,9 @@
       <v-toolbar-title>JD Email Builder</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      
-        <nuxt/>
-    
+        <v-container app>
+          <nuxt/>
+        </v-container>
     </v-content>
     <v-footer class="pa-4 dflex justify-center" dark app fixed>
     <div>JD SPORTS. &copy; All Rights Reserved. {{ new Date().getFullYear() }}</div>
