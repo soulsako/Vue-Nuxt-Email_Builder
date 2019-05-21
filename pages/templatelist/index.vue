@@ -1,12 +1,12 @@
 <template>
   <v-container app grid-list-lg>
-    <v-layout app wrap>
-      <v-flex lg4 v-for="(template, index) in templates" :key="index">
-        <v-card v-for="(component, index) in template" :key="index">
+    <v-layout app>
+      <v-flex lg12 v-for="(template, index) in templates" :key="index">
+        <div v-for="(component, index) in template" :key="index">
           <component 
           :is="components[component.name]" 
           v-bind="component"/>
-        </v-card>
+        </div>
       </v-flex>
     </v-layout>
   </v-container>
@@ -22,7 +22,7 @@ import componentsData from '@/componentsData';
         templates: [], 
         components: {
           HeaderImage: 'HeaderImage', 
-          SingleColumn: 'SingleColumn',
+          SingleApparel: 'SingleApparel',
           SingleFootwear: 'SingleFootwear',
           TextAndCta: 'TextAndCta',
           TwoColumnApparel: 'TwoColumnApparel',
