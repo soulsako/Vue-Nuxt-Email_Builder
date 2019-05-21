@@ -52,7 +52,6 @@
               <v-img
               class="app__img"
               aspect-ratio="1"
-              gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
               :style="{'background-image': 'url(' + require(`../assets/images/${category.background_image}`) + ')'}"
               >
               </v-img>

@@ -24,7 +24,7 @@
     }, 
     computed: {
       width(){
-        return this.fullWidth ? '100%' : null
+        return this.fullWidth ? '100%' : 'auto'
       }
     }
   }
@@ -33,7 +33,8 @@
 <style lang="scss" scoped>
   .button {
     display: inline-block;
-    padding: 1.5rem 5rem;
+    padding: 1rem;
+    width: 5rem;
     text-transform: uppercase;
     text-align: center;
   }

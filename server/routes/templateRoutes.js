@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router()
-const Templates = require('../models/mentemplates');
+const MenTemplates = require('../models/mentemplates');
 
 router.get('/fascia/:id', (req, res) => {
 
   const id = req.params.id;
-  Templates.find({fascia_id: id})
+  MenTemplates.find({fascia_id: id})
   .exec().then(doc => {
     if(!doc){
       res.status(404).send();
@@ -21,21 +21,16 @@ router.get('/:id', (req, res) => {
   const obj = req.params;
   let operation;
   if(obj.id === 'all'){
-    operation = Templates.find();
-  }else if(obj.id === 'product') {
-    operation = Templates.findOne({template_type: obj.id});
-  }else if(obj.id === 'sale'){
-    operation = Templates.findOne({template_type: obj.id})
-  }else if(obj.id === 'launch'){
-    operation = Templates.findOne({template_type: obj.id})
-  }else{
-    operation = Templates.findById({_id: obj.id});
+    operation = MenTemplates.find();
+  }else {
+    operation = MenTemplates.findOne({template_type: obj.id});
   }
   operation.exec().then(doc => {
     res.send(doc);
   })
   .catch(error => console.log('Error ocurred!', error));
 });
+
 
 module.exports = router;
 

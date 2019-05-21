@@ -2,26 +2,35 @@
 
 export const state = () => ({
   fascias: [], 
-  categories: [], 
+  categories: [],
+  templates: [], 
   templateInfo: {
     // Persist this bit of information in local storage
     fascia: '', 
     category: '',
     type: ''
-  }
-})
+  }, 
+  componentsData: []
+});
 
 export const getters = {
+
   getFascias: state => state.fascias, 
   getCategories: state => state.categories, 
-  getFasciaId: state => state.fasciaId,
-  getTemplateInfo: state => state.templateInfo
+  getTemplates: state => state.templates,
+  getTemplateInfo: state => state.templateInfo, 
+  getComponentsData: state => state.componentsData
 }
 
 export const mutations = {
+
   setCategories: (state, categories) => state.categories = categories,
 
   setFascias: (state, fascias) => state.fascias = fascias,
+
+  setTemplates: (state, templates) => state.templates = templates,
+
+  setComponentsData: (state, data) => state.componentsData = data,
 
   setSelected: (state, data) => {
     let type, typeString;
@@ -41,7 +50,9 @@ export const mutations = {
 }
 // Set Master data to store state
 export const actions = {
+
   async nuxtServerInit(vuexContext, context){
+    
     await context.$axios.$get('/api/categories/all')
     .then(categories => {
       vuexContext.commit('setCategories', categories)

@@ -124,8 +124,8 @@ const componentsArray = [
     name: 'HeaderImage',
     src: 'https://i8.amplience.net/i/jpl/mens-banner-84c27b007331dd3906d9d38fffdbef39', 
     url: 'http://jdsports.com/men', 
-    color: '#111', 
-    background: '#fff'
+    btnColor: '#fff', 
+    btnBackground: '#111'
   },
   {
     name: 'SingleApparel',

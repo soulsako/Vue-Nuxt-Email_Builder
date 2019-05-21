@@ -1,8 +1,8 @@
 <template>
   <div class="headerimage" :style="{backgroundImage: 'url('+ src +')'}">
     <BaseButton
-    :color="color"
-    :background="background"
+    :color="btnColor"
+    :background="btnBackground"
     class="app__button"
     >shop now</BaseButton>
   </div>
@@ -16,11 +16,11 @@
         required: true, 
         type: String
       }, 
-      color: {
+      btnColor: {
         required: false, 
         type: String
       }, 
-      background: {
+      btnBackground: {
         required: false, 
         type: String
       }
