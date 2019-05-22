@@ -7,22 +7,30 @@
       <img :src="exclusiveImg" alt="Only Available at JD" class="singleapparel__exclusive-img">
     </div>
      <!--dynamically change background-color with infoColor computed property-->
-      <div id="box1" class="singleapparel__info-one draggable" :style="{backgroundColor: infoBackColor, color: infoTextColor}">
+      <div id="box1" class="singleapparel__info-one draggable" :style="{backgroundColor: infoBackColor, color: infoTextColor, top: top, ...rightOrLeft}">
         <div class="singleapparel__info-brand">{{ brand }}</div>
-        <div class="singleapparel__info-description">{{ description.one }}</div>
+        <div class="singleapparel__info-description">{{ descriptionOne }}</div>
         <!-- Only show old price if sale prop is true -->
         <div class="singleapparel__info--price">
-        <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ description.oldPrice }}</span>
-        <span class="singleapparel__info-price">{{ currency.gb}}{{ description.price }}</span>
+        <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ oldPrice }}</span>
+        <span class="singleapparel__info-price">{{ currency.gb}}{{ price }}</span>
+        <div v-if="multiple">
+          <div class="singleapparel__info-description">{{ descriptionTwo }}</div>
+          <!-- Only show old price if sale prop is true -->
+          <div class="singleapparel__info--price">
+          <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ oldPriceTwo }}</span>
+          <span class="singleapparel__info-price">{{ currency.gb}}{{ priceTwo }}</span>
+          </div>
+        </div>
         </div>
       </div>
         <!-- Only show second info box if multiple prop is true -->
-      <div id="box2" v-if="multiple" class="singleapparel__info-two draggable" :style="{backgroundColor: infoBackColor, color: infoTextColor}">
-        <div class="singleapparel__info-description">{{ description.two }}</div>
+      <div id="box2" v-if="multipleSplit" class="singleapparel__info-two draggable" :style="{backgroundColor: infoBackColor, color: infoTextColor, ...rightOrLeft}">
+        <div class="singleapparel__info-description">{{ descriptionTwo }}</div>
         <!-- Only show old price if sale prop is true -->
         <div class="singleapparel__info--price">
-        <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ description.oldPriceTwo }}</span>
-        <span class="singleapparel__info-price">{{ currency.gb}}{{ description.priceTwo }}</span>
+        <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ oldPriceTwo }}</span>
+        <span class="singleapparel__info-price">{{ currency.gb}}{{ priceTwo }}</span>
         </div>
       </div>
   </div>
@@ -33,6 +41,10 @@
 import ExclusiveImage from '@/exclusive'
 import Currency from '@/currency'
 import interact from 'interactjs'
+const stringFalse = {type: String, required: false}
+const stringTrue = {type: String, required: true}
+const falseBoolean = {required: false, default: () => false, type: Boolean}
+
   export default {
     data() {
       return {
@@ -40,60 +52,31 @@ import interact from 'interactjs'
       }
     },
     props: {
-      sale: {
-        required: false, 
-        default: () => false, 
-        type: Boolean
-      }, 
-      women: {
-        required: false,
-        default: () => false, 
-        type: Boolean
-      }, 
-      src: {
-        required: true, 
-        type: String
-      }, 
-      brand: {
-        required: true,
-        type: String
-      },
-      multiple: {
-        required: false, 
-        default: () => false, 
-        type: Boolean
-      },
-      description: {
-        required: true, 
-        type: Object
-      },
-      url: {
-        required: true, 
-        type: String
-      }, 
-      exclusive: {
-        required: false, 
-        default: () => false, 
-        type: Boolean
-      },  
-      user: {
-        required: false, 
-        default: () => {}, 
-        type: Object
-      }, 
-      invert: {
-        required: false, 
-        default: () => false, 
-        type: Boolean
-      }
+      sale: falseBoolean, 
+      women: falseBoolean, 
+      src: stringTrue, 
+      brand:stringTrue,
+      multiple: falseBoolean,
+      multipleSplit: falseBoolean,
+      descriptionOne: stringTrue,
+      descriptionTwo: stringTrue,
+      url: stringTrue, 
+      exclusive: falseBoolean,  
+      invert: falseBoolean,
+      price: stringTrue,
+      oldPrice: stringFalse, 
+      priceTwo: stringFalse, 
+      oldPriceTwo: stringFalse, 
+      color: stringFalse, 
+      backgroundColor: stringFalse
     }, 
     computed: {
       exclusiveImg(){
         return this.women ? ExclusiveImage.gb.women : ExclusiveImage.gb.men
       }, 
       infoBackColor(){
-        if(this.user.backColor){
-          return this.user.backColor;
+        if(this.backgroundColor){
+          return this.backgroundColor;
         }else if(this.sale){
           return '#E74C3C'
         }else if(this.women){
@@ -103,13 +86,19 @@ import interact from 'interactjs'
         }
       }, 
       infoTextColor(){
-        return this.user.textColor ? this.user.textColor : '#fff';
+        return this.color ? this.color : '#fff';
       }, 
       invertImg(){
         return this.invert ? 'right' : 'left'
       }, 
       invertExclusive(){
         return this.invert ? {right: '3rem'} : {left: '3rem'}
+      },
+      top(){
+        return this.multipleSplit ? '65%' : '75%'
+      }, 
+      rightOrLeft(){
+        return this.invert ? {left: '25%'} : {right: '-25%'}
       }
     },
     methods: {
@@ -181,7 +170,7 @@ import interact from 'interactjs'
 <style lang="scss" scoped>
   .singleapparel {
     position: relative;
-    width: 55.3rem;
+    width: 55.5rem;
     height: 53rem;
 
     &__exclusive {
@@ -195,17 +184,22 @@ import interact from 'interactjs'
         width: 100%;
       }
     }
-    &__info {
-      
-
+    &__info { 
+     
       &-one {
         margin-bottom: 1rem;
       }
-
+      &-two {
+        top: 85%;
+      }
       &-one, &-two {
         padding: 1.5rem;
         color: #fff;
-        max-width: 50%;
+        width: 27.75rem;
+        display: flex;
+        flex-direction: column;
+        transform: translate(-50%, -50%);
+        position: absolute;
       }
 
       &-oldprice {

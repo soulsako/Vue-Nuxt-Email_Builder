@@ -1,10 +1,12 @@
 const componentsArray = [
-   {
+  {
     name: 'TextAndCta',
-    text: 'Hoodies',
+    text: 'Accessories',
     button: true, 
     logo: '', 
-    sale: false
+    sale: false, 
+    btnColor: '#111', 
+    btnBackground: '#fff'
   },
   {
     name: 'PostCardStyle',
@@ -112,11 +114,11 @@ const componentsArray = [
     name: 'SingleFootwear',
     sale: false, 
     women: false,
-    exclusive: false,
+    exclusive: true,
     src: 'https://i8.amplience.net/t/jpl/jd_product_list?plu=jd_282663_a&qlt=80&w=560&h=400&v=1', 
-    brand: 'Brand',
+    brand: 'Addidas Originals',
     url: 'http://jdsports.com/men',
-    description: 'Some product description',
+    description: 'Superstar junior',
     oldPrice: '49.99', 
     price: '35.99'
   },
@@ -129,27 +131,24 @@ const componentsArray = [
   },
   {
     name: 'SingleApparel',
-    multiple: true, 
+    multiple: false,
+    multipleSplit: true, 
     sale: false, 
-    women: true,
+    women: false,
     invert: false,
     exclusive: true,
     src: 'https://i8.amplience.net/i/jpl/men-rightplu-e87a66499d2a4a7e462d289b7a734d68', 
     brand: 'Brand',
     url: 'http://jdsports.com/men',
-    description:{
-      one: 'Some Product Description Some Product Description', 
-      two: 'Some second Description',
-      oldPrice: '49.99', 
-      oldPriceTwo: '29.99',
-      price: '35.99',
-      priceTwo: '15.99',
-    }, 
-    user: {
-        backColor: '', 
-        textColor: ''
-      }
-    }
+    descriptionOne: 'Some Product Description Some Product Description', 
+    descriptionTwo: 'Some second Description',
+    oldPrice: '49.99', 
+    oldPriceTwo: '29.99',
+    price: '35.99',
+    priceTwo: '15.99',
+    color: '', 
+    backgroundColor: ''
+  }
   ];
 
   export default function(sale){

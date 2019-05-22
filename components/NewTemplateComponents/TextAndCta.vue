@@ -1,7 +1,7 @@
 <template>
   <div class="textandcta">
     <img :src="logo" v-if="logo" alt="some logo" class="textandcta__img">
-    <h1 :style="{color: saleColor}" class="display-3 font-weight-bold">{{ text }}</h1>
+    <h1 :style="{color: saleColor}" class="display-2 font-weight-bold pa-3">{{ text }}</h1>
     <BaseButton
     :color="saleColor"
     :background="btnBackground"
@@ -45,10 +45,11 @@
 <style lang="scss" scoped>
   .textandcta {
     width: 100%;
-    padding: 1rem;
-    text-align: center;
-    justify-content: space-between;
+    padding: 2.5rem;
+    justify-content: space-evenly;
     display: flex;
+    align-items: center;
     flex-direction: column;
+    text-transform: uppercase;
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<!--Insert background image dynamically using the src prop passed in -->
+<!-- Insert background image dynamically using the src prop passed in -->
   <div class="singlefootwear">
     <div class="singlefootwear__top" :style="{ backgroundImage: 'url(' + src + ')' }">
       <div v-if="exclusive" class="singlefootwear__exclusive">
@@ -18,10 +18,10 @@
       <span :style="{color: priceColor}" class="singlefootwear__info-price">{{ currency.gb}}{{ price }}</span>
       </div>
     </div>
-        <AppButton
+        <BaseButton
         :color="btnColor"
         background="#fff"
-        >Shop now</AppButton>
+        >Shop now</BaseButton>
     </div>
   </div>
 </template>
@@ -93,6 +93,7 @@ import Currency from '@/currency'
 <style lang="scss" scoped>
   .singlefootwear {
     display: inline-block;
+    text-transform: uppercase;
     &__top {
       position: relative;
       min-height: 40rem;
@@ -114,7 +115,7 @@ import Currency from '@/currency'
     &__bottom {
       @include flexCenterY;
       justify-content: space-between;
-      padding: 1rem 0;
+      padding: 1.5rem 0;
     }
     &__info {
         display: flex;
