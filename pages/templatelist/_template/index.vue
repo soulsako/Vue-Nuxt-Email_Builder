@@ -9,7 +9,7 @@
         </div>
       </v-flex>
       <v-flex lg6>
-        <div>Editing tools</div>
+       
       </v-flex>
     </v-layout>
   </v-container>
@@ -19,6 +19,7 @@
 import { mapGetters } from 'vuex';
 import componentsData from '@/componentsData';
   export default {
+    
     data(){
       return {
         generatedData: [],
@@ -30,7 +31,8 @@ import componentsData from '@/componentsData';
           // TwoColumnApparel: 'TwoColumnApparel',
           // TwoColumnFootwear: 'TwoColumnFootwear'
           TwoColumn: 'TwoColumn'
-        }
+        }, 
+        color: ''
       }
     }, 
     computed: {

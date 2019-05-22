@@ -34,7 +34,7 @@
   .button {
     display: inline-block;
     padding: 1rem;
-    width: 5rem;
+    width: 27rem;
     text-transform: uppercase;
     text-align: center;
   }
