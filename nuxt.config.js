@@ -3,6 +3,14 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
   mode: 'universal',
+  render: {
+    bundleRenderer: {
+      shouldPreload: (file, type) => {
+        return ['script', 'style', 'font'].includes(type)
+      }
+    }
+
+  },
 
   /*
   ** Headers of the page
@@ -35,8 +43,10 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~/assets/style/app.styl', 
-    '~assets/styles/main.css'
+    '~/assets/style/app.styl',
+    '~/assets/style/font.styl', 
+    '~assets/styles/main.css', 
+    '~static/hco_fonts/hco_fonts.css'
   ],
 
   /*
@@ -54,7 +64,7 @@ module.exports = {
     '@nuxtjs/style-resources',
     //Axios now available on the global instance. Use it by accessing this.$axios
     //Note: The response will now be available as just response and NOT response.data
-    //If using axios in async server side functions - Use context.app.axios
+    //If using axios in async server side functions - Use context.app.$axios
     '@nuxtjs/axios'
   ],
   styleResources: {

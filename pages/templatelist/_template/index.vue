@@ -28,8 +28,6 @@ import componentsData from '@/componentsData';
           SingleApparel: 'SingleApparel',
           SingleFootwear: 'SingleFootwear',
           TextAndCta: 'TextAndCta',
-          // TwoColumnApparel: 'TwoColumnApparel',
-          // TwoColumnFootwear: 'TwoColumnFootwear'
           TwoColumn: 'TwoColumn'
         }, 
         color: ''

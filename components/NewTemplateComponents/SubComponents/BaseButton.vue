@@ -1,6 +1,6 @@
 <template>
   <div
-  :style="{backgroundColor: background, color: color, border: '1px solid ' + color, width: width}"
+  :style="{backgroundColor: background, color: color, border: '1px solid ' + color}"
   class="button">
   <slot/>
   </div>
@@ -16,15 +16,6 @@
       background: {
         required: false,
         type: String
-      }, 
-      fullWidth: {
-        required: false, 
-        type: Boolean
-      }
-    }, 
-    computed: {
-      width(){
-        return this.fullWidth ? '100%' : 'auto'
       }
     }
   }
@@ -32,9 +23,9 @@
 
 <style lang="scss" scoped>
   .button {
-    display: inline-block;
-    padding: 1rem;
     width: 27rem;
+    display: inline-block;
+    padding: 1.5rem 0;
     text-transform: uppercase;
     text-align: center;
   }

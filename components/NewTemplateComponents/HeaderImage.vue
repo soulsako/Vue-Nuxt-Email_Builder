@@ -1,8 +1,8 @@
 <template>
   <div class="headerimage" :style="{backgroundImage: 'url('+ src +')'}">
     <BaseButton
-    :color="btnColor"
-    :background="btnBackground"
+    :color="compColor"
+    :background="compBackground"
     class="app__button"
     >shop now</BaseButton>
   </div>
@@ -23,9 +23,30 @@
       btnBackground: {
         required: false, 
         type: String
+      }, 
+      sale: {
+        required: false, 
+        type: Boolean
+      }
+    }, 
+    computed: {
+      compColor(){
+        if(this.btnColor){
+          return this.btnColor;
+        }
+          return '#fff';
+        },
+      compBackground(){
+      if(this.btnBackground){
+        return this.btnBackground;
+      }else if(this.sale){
+        return '#e72933';
+      }else {
+        return '#111'
       }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

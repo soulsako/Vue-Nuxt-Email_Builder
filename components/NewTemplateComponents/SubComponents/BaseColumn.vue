@@ -9,9 +9,8 @@
 
     <div v-if="button" class="column__button">
       <BaseButton
-      color="#111"
+      :color="priceColor"
       background="#fff"
-      :fulWidth="true"
       >{{ buttonText }}</BaseButton>
     </div>
 
@@ -26,11 +25,11 @@
     </div>
 
     <div v-if="full" class="column__info two">
-      <div class="column__info-description">{{ description }}</div>
+      <div class="column__info-description">{{ descriptionTwo }}</div>
       <!-- Only show old price if sale prop is true -->
       <div class="column__info--price">
-      <span v-if="sale" class="column__info-oldprice">{{ currency.gb}}{{ oldPrice }}</span>
-      <span :style="{color: priceColor}" class="column__info-price">{{ currency.gb}}{{ price }}</span>
+      <span v-if="sale" class="column__info-oldprice">{{ currency.gb}}{{ oldPriceTwo }}</span>
+      <span :style="{color: priceColor}" class="column__info-price">{{ currency.gb}}{{ priceTwo }}</span>
       </div>
     </div>
   </div>
@@ -45,75 +44,13 @@ import Currency from '@/currency'
         currency: Currency
       }
     },
-    props: {
-      height: {
-        required: true, 
-        type: String
-      },
-      full: {
-        required: false,
-        type: Boolean
-      },
-      src: {
-        required: false, 
-        type: String
-      }, 
-      brand: {
-        required: false, 
-        type: String
-      }, 
-      description: {
-        required: false, 
-        type: String
-      }, 
-      oldPrice: {
-        required: false, 
-        type: String
-      }, 
-      price:  {
-        required: false, 
-        type: String
-      },
-      descriptionTwo: {
-        required: false, 
-        type: String
-      }, 
-      oldPriceTwo: {
-        required: false, 
-        type: String
-      }, 
-      priceTwo:  {
-        required: false, 
-        type: String
-      },
-      sale: {
-        required: false,
-        default: () => false,
-        type: Boolean
-      }, 
-      exclusive: {
-        required: false, 
-        type: Boolean
-      }, 
-      women: {
-        required: false, 
-        type: Boolean
-      }, 
-      button: {
-        required: false, 
-        type: Boolean
-      }, 
-      buttonText: {
-        required: false, 
-        type: String
-      }
-    }, 
+    props: ['height', 'sale', 'women', 'exclusive', 'full', 'button', 'buttonText', 'brand', 'description', 'price', 'oldPrice', 'src', 'descriptionTwo', 'oldPriceTwo', 'priceTwo'], 
     computed: {
       exclusiveImg(){
         return this.women ? ExclusiveImage.gb.women : ExclusiveImage.gb.men
       }, 
       priceColor(){
-        return this.sale ? 'red' : '#111'
+        return this.sale ? '#e72933' : '#111'
       }
     }
   }

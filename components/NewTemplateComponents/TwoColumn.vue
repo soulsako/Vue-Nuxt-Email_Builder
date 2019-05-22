@@ -8,86 +8,79 @@
       :exclusive="exclusive"
       :full="full"
       :button="button"
-      :buttonText="column.description.buttonText" 
-      :brand="column.brand" 
-      :description="column.description.one"
-      :price="column.description.price"
-      :oldPrice="column.description.oldPrice"
-      :descriptionTwo="column.description.two"
-      :priceTwo="column.description.priceTwo"
-      :oldPriceTwo="column.description.oldPriceTwo"
-      :src="column.description.src"/>
+      :buttonText="buttonText"
+      :brand="brand" 
+      :description="description"
+      :price="price"
+      :oldPrice="oldPrice"
+      :descriptionTwo="descriptionThree"
+      :priceTwo="priceThree"
+      :oldPriceTwo="oldPriceThree"
+      :src="src"/>
     </div>
     
-    <BaseColumn
-    :height="height"
-    :exclusive="exclusive" 
-    :sale="sale"
-    :full="full" 
-    :women="women"
-    :button="button"
-    :buttonText="columnTwo.description.buttonText"
-    :brand="columnTwo.brand" 
-    :description="columnTwo.description.one"
-    :price="columnTwo.description.price"
-    :oldPrice="columnTwo.description.oldPrice"
-    :descriptionTwo="column.description.two"
-    :priceTwo="column.description.priceTwo"
-    :oldPriceTwo="column.description.oldPriceTwo"
-    :src="columnTwo.description.src"/>
+   <BaseColumn
+      :height="height"
+      :sale="sale"
+      :women="women"
+      :exclusive="exclusive"
+      :full="full"
+      :button="button"
+      :buttonText="buttonTextTwo"
+      :brand="brandTwo" 
+      :description="descriptionTwo"
+      :price="priceTwo"
+      :oldPrice="oldPriceTwo"
+      :descriptionTwo="descriptionFour"
+      :priceTwo="priceFour"
+      :oldPriceTwo="oldPriceFour"
+      :src="srcTwo"/>
   </div>
 </template>
 
 <script>
+const stringRequired = {required: true, type: String}
+const booleanNotRequired = {required: false, type: Boolean, default: () => false}
+const stringNotRequired = {required: false, type: String}
   export default {
     props: {
-      height: {
-        required: true, 
-        type: String
-      }, 
-      sale: {
-        required: false,
-        default: () => false,
-        type: Boolean
-      }, 
-      exclusive: {
-        required: false, 
-        type: Boolean
-      },
-      women: {
-        required: false, 
-        type: Boolean
-      },
-      full: {
-        required: false, 
-        type: Boolean
-      }, 
-      column: {
-        required: true, 
-        type: Object
-      }, 
-      columnTwo: {
-        required: true, 
-        type: Object
-      }, 
-      button: {
-        required: false, 
-        type:Boolean 
-      }, 
-      buttonText: {
-        required: false, 
-        type: String
-      }
+      height: stringRequired, 
+      sale: booleanNotRequired, 
+      exclusive: booleanNotRequired,
+      women: booleanNotRequired,
+      full: booleanNotRequired, 
+      button: booleanNotRequired, 
+      buttonText: stringNotRequired,
+      buttonTextTwo: stringNotRequired, 
+      brand: stringRequired,
+      description: stringRequired, 
+      price: stringRequired,
+      oldPrice: stringNotRequired,  
+      src: stringRequired, 
+      brandTwo: stringRequired, 
+      descriptionTwo: stringRequired, 
+      priceTwo: stringRequired, 
+      oldPriceTwo: stringRequired, 
+      srcTwo: stringRequired, 
+      descriptionThree: stringNotRequired, 
+      descriptionFour: stringNotRequired, 
+      priceThree: stringNotRequired, 
+      priceFour: stringNotRequired, 
+      oldPriceThree: stringNotRequired, 
+      oldPriceFour: stringNotRequired
     }
   }
 </script>
 
 <style lang="scss" scoped>
   .twocolumn {
+    width: 56rem;
     display: inline-block;
+    @include clearFix;
 
     &__left {
       float: left;
+      width: 27rem;
     }
   }
 </style>

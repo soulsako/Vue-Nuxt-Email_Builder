@@ -1,5 +1,5 @@
 <template>
-<!--Insert background image dynamically using the src prop passed in -->
+<!-- Insert background image dynamically using the src prop passed in -->
   <div class="singlefootwear">
     <div class="singlefootwear__top" :style="{ backgroundImage: 'url(' + src + ')' }">
       <div v-if="exclusive" class="singlefootwear__exclusive">
@@ -7,7 +7,7 @@
         <img :src="exclusiveImg" alt="Only Available at JD" class="singlefootwear__exclusive-img">
       </div>
     </div>
-     <!--dynamically change background-color with infoColor computed property-->
+    
     <div class="singlefootwear__bottom">
       <div class="singlefootwear__info">
       <div class="singlefootwear__info-brand">{{ brand }}</div>
@@ -18,10 +18,10 @@
       <span :style="{color: priceColor}" class="singlefootwear__info-price">{{ currency.gb}}{{ price }}</span>
       </div>
     </div>
-        <AppButton
+        <BaseButton
         :color="btnColor"
         background="#fff"
-        >Shop now</AppButton>
+        >Shop now</BaseButton>
     </div>
   </div>
 </template>
@@ -29,6 +29,8 @@
 <script>
 import ExclusiveImage from '@/exclusive'
 import Currency from '@/currency'
+const stringRequired = { required: true, type: String }
+const booleanNotRequired = { required: false, default: () => false, type: Boolean }
   export default {
     data() {
       return {
@@ -36,41 +38,14 @@ import Currency from '@/currency'
       }
     },
     props: {
-      sale: {
-        required: false, 
-        default: () => false, 
-        type: Boolean
-      }, 
-      women: {
-        required: false,
-        default: () => false, 
-        type: Boolean
-      }, 
-      src: {
-        required: true, 
-        type: String
-      }, 
-      brand: {
-        required: true,
-        type: String
-      },
-      description: {
-        required: true, 
-        type: String
-      },
-      url: {
-        required: true, 
-        type: String
-      }, 
-      exclusive: {
-        required: false, 
-        default: () => false, 
-        type: Boolean
-      }, 
-      price: {
-        required: true, 
-        type: String
-      }, 
+      sale: booleanNotRequired, 
+      women: booleanNotRequired, 
+      src: stringRequired, 
+      brand: stringRequired,
+      description: stringRequired,
+      url: stringRequired, 
+      exclusive: booleanNotRequired, 
+      price: stringRequired, 
       oldPrice: {
         required: false, 
         type: String
@@ -81,10 +56,10 @@ import Currency from '@/currency'
         return this.women ? ExclusiveImage.gb.women : ExclusiveImage.gb.men
       }, 
       btnColor(){
-        return this.sale ? 'red' : '#111'
+        return this.sale ? '#e72933' : '#111'
       }, 
       priceColor(){
-        return this.sale ? 'red' : '#111'
+        return this.sale ? '#e72933' : '#111'
       }
     }
   }
@@ -93,10 +68,11 @@ import Currency from '@/currency'
 <style lang="scss" scoped>
   .singlefootwear {
     display: inline-block;
+    text-transform: uppercase;
     &__top {
       position: relative;
-      min-height: 40rem;
-      min-width: 56rem;
+      height: 40rem;
+      width: 56rem;
     }
 
     &__exclusive {
@@ -114,7 +90,7 @@ import Currency from '@/currency'
     &__bottom {
       @include flexCenterY;
       justify-content: space-between;
-      padding: 1rem 0;
+      padding: 1.5rem 0;
     }
     &__info {
         display: flex;
@@ -124,8 +100,7 @@ import Currency from '@/currency'
 
       &-oldprice {
         text-decoration: line-through;
-        margin-right: .8
-        rem;
+        margin-right: .8rem;
         color: #111;
       }
       &-brand, &-price, &-oldprice {
