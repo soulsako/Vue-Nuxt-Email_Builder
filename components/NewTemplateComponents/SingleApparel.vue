@@ -7,7 +7,7 @@
       <img :src="exclusiveImg" alt="Only Available at JD" class="singleapparel__exclusive-img">
     </div>
      <!--dynamically change background-color with infoColor computed property-->
-      <div id="box1" class="singleapparel__info-one draggable" :style="{backgroundColor: infoBackColor, color: infoTextColor, top: top, ...rightOrLeft}">
+      <div id="box1" class="singleapparel__info-one draggable" :style="{backgroundColor: infoBackColor, color: infoTextColor, bottom: bottom, ...rightOrLeft}">
         <div class="singleapparel__info-brand">{{ brand }}</div>
         <div class="singleapparel__info-description">{{ descriptionOne }}</div>
         <!-- Only show old price if sale prop is true -->
@@ -94,8 +94,8 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
       invertExclusive(){
         return this.invert ? {right: '3rem'} : {left: '3rem'}
       },
-      top(){
-        return this.multipleSplit ? '65%' : '75%'
+      bottom(){
+        return this.multipleSplit ? '6rem' : '4rem'
       }, 
       rightOrLeft(){
         return this.invert ? {left: '25%'} : {right: '-25%'}
@@ -174,10 +174,7 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
     height: 53rem;
 
     &__exclusive {
-      position: absolute;
-      top: 3rem;
-      width: 5rem;
-      height: 5rem;
+     @include exclusiveBig;
 
       &-img {
         display: block;
@@ -193,19 +190,20 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
         top: 85%;
       }
       &-one, &-two {
-        padding: 1.5rem;
+        padding: 1.8rem;
         color: #fff;
         width: 29rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
         transform: translate(-50%, -50%);
         position: absolute;
-        font-size: 1.8rem;
-        line-height: 2.8rem;
+        font-size: $font-size-1;
       }
 
       &-oldprice {
         text-decoration: line-through;
-        margin-right: .8
-        rem;
+        margin-right: .2rem;
         color: #111;
       }
       &-brand, &-price, &-oldprice {

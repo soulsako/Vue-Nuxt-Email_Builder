@@ -3,54 +3,54 @@
     <HeaderImage
     key="1" 
     v-bind="data1"/>
-    <div style="border-bottom: 1px solid #111">
+    
     <TextAndCta
     key="2" 
     v-bind="data2"/>
-    </div>
+    
     <SingleFootwear
     key="3" 
     v-bind="data3"/>
-    <div style="border-bottom: 1px solid #111">
+    
     <SingleApparel
     key="4" 
     v-bind="data4"/>
-    </div>
-    <div style="border-bottom: 1px solid #111">
+    
+    
     <TwoColumn
     key="5" 
     v-bind="data5"/>
-    </div>
-    <div style="border-bottom: 1px solid #111">
+    
+    
     <TwoColumn
     key="6" 
     v-bind="data6"/>
-    </div>
-    <div style="border-bottom: 1px solid #111">
+    
+    
     <TwoColumn
     key="7" 
     v-bind="data7"/>
-    </div>
-    <div style="border-bottom: 1px solid #111">
+    
+    
     <TwoColumn
     key="8" 
     v-bind="data8"/>
-    </div>
-     <div style="border-bottom: 1px solid #111">
+    
+     
     <TextAndCta
     key="9" 
     v-bind="data9"/>
-    </div>
-     <div style="border-bottom: 1px solid #111">
+    
+     
     <TextAndCta
     key="10" 
     v-bind="data10"/>
-    </div>
-     <div style="border-bottom: 1px solid #111">
+    
+     
     <TextAndCta
     key="11" 
     v-bind="data11"/>
-    </div>
+
   </div>
 </template>
 
@@ -64,12 +64,12 @@
           url: 'http://jdsports.com/men', 
           btnColor: '', 
           btnBackground: '', 
-          sale: true
+          sale: false
         },
         data2:  {
           name: 'TextAndCta',
-          text: 'Accessories',
-          sale: true, 
+          text: "men's",
+          sale: false, 
         }, 
         data3: {
           name: 'SingleFootwear',
@@ -86,9 +86,9 @@
         data4: {
           name: 'SingleApparel',
           multiple: false,
-          multipleSplit: false, 
-          sale: true, 
-          women: false,
+          multipleSplit: true, 
+          sale: false, 
+          women: true,
           invert: false,
           exclusive: true,
           src: 'https://i8.amplience.net/i/jpl/men-rightplu-e87a66499d2a4a7e462d289b7a734d68', 
@@ -101,7 +101,7 @@
           price: '35.99',
           priceTwo: '15.99',
           color: '', 
-          backgroundColor: ''
+          backgroundColor: 'yellowgreen'
         }, 
         data5: {
           name: 'TwoColumnApparel',
@@ -122,7 +122,7 @@
         }, 
         data6: {
           name: 'TwoColumnFootwear',
-          sale: true,
+          sale: false,
           height: '19',
           women: true,
           exclusive: true,
@@ -140,7 +140,7 @@
         data7: {
           name: 'TwoColumnFullApparel',
           full: true,
-          sale: true,
+          sale: false,
           height: '53',
           women: true,
           exclusive: true,
@@ -163,7 +163,7 @@
         }, 
         data8: {
           name: 'PostCardStyle',
-          sale: true,
+          sale: false,
           height: '34.5',
           women: true,
           exclusive: true,
@@ -183,23 +183,23 @@
         }, 
         data9: {
           name: 'Text',
-          text: 'Accessories', 
-          sale: true
+          text: "men's", 
+          sale: false
         },
         data10:{
           name: 'TextCta',
-          text: 'Accessories',
+          text: "men's",
           button: true, 
-          sale: true, 
+          sale: false, 
           btnColor: '#111', 
           btnBackground: '#fff'
         },
         data11:{
           name: 'TextLogoCta',
-          text: 'Accessories',
+          text: "men's",
           button: true, 
           logo: 'https://i8.amplience.net/t/jpl/jd_product_list?plu=jd_140351_a&qlt=80&wid=270&hei=345', 
-          sale: true, 
+          sale: false, 
           btnColor: '#111', 
           btnBackground: '#fff'
         }

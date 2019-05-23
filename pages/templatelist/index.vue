@@ -2,9 +2,9 @@
   <v-container app grid-list-lg>
     <v-layout app wrap>
       <v-flex lg4 v-for="(template, index) in templates" :key="index">
-        <v-card :hover="true" height="460" :to="`/templatelist/${template.name}`">
-          <v-card-title primary-title class="justify-center">
-            <h3 class="headline">{{template.title}}</h3>
+        <v-card :hover="true" :to="`/templatelist/${template.name}`">
+          <v-card-title class="justify-center v-card-title">
+            <p>{{template.title}}</p>
           </v-card-title>
           <v-img
           class="app__img" 
@@ -61,10 +61,22 @@ import { mapGetters } from 'vuex'
   .app {
     
     &__img {
-      // background-size: cover;
-      // background-position: center;
+      background-size: contain;
+      background-position: center;
       width: 100%;
       display: block;
+    }
+  }
+  .v-card-title {
+    @include theme-1;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 1rem;
+    font-weight: 400;
+
+    p {
+      padding: 0;
+      margin: 0;
     }
   }
 

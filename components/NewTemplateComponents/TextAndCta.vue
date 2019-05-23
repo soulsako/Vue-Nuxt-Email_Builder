@@ -1,7 +1,7 @@
 <template>
   <div class="textandcta">
     <img :src="logo" v-if="logo" alt="some logo" class="textandcta__img">
-    <h1 :style="{color: saleColor}" class="display-2 font-weight-bold pa-3">{{ text }}</h1>
+    <h1 :style="{color: saleColor}" class="textandcta__heading">{{ text }}</h1>
     <BaseButton
     :color="saleColor"
     :background="btnBackground"
@@ -10,29 +10,19 @@
 </template>
 
 <script>
+const stringNotRequired = { required: false, type: String }
+const booleanNotrequired = { required: false, type: Boolean }
   export default {
     props: {
       text: {
+        required: true, 
         type: String
       }, 
-      button: {
-        type: Boolean
-      }, 
-      logo: {
-        type: String, 
-        default: () => ''
-      }, 
-      sale: {
-        type: Boolean
-      }, 
-      btnColor: {
-        required: false, 
-        type: String
-      }, 
-      btnBackground: {
-        required: false, 
-        type: String
-      }
+      button: booleanNotrequired, 
+      logo: stringNotRequired, 
+      sale: booleanNotrequired, 
+      btnColor: stringNotRequired, 
+      btnBackground: stringNotRequired
     },
     computed: {
       saleColor(){
@@ -45,11 +35,23 @@
 <style lang="scss" scoped>
   .textandcta {
     width: 60rem;
-    padding: 2.5rem;
+    padding-top: 3.2rem;
     justify-content: space-evenly;
     display: flex;
     align-items: center;
     flex-direction: column;
     text-transform: uppercase;
+    > * {
+      margin-bottom: 3.2rem;
+    }
+    &__img {
+
+    }
+    &__heading {
+      font-size: 4rem;
+      line-height: 2.8rem;
+      font-weight: bold;
+      // font-family: 'Gotham-ultra'
+    }
   }
 </style>

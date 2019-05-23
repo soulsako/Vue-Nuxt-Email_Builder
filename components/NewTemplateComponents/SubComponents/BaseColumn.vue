@@ -62,14 +62,8 @@ import Currency from '@/currency'
     width: 27rem;
     float: right;
 
-    
-
     &__exclusive {
-      position: absolute;
-      top: 1.5rem;
-      left: 1.5rem;
-      width: 5rem;
-      height: 5rem;
+      @include exclusiveSmall;
 
       &-img {
       display: block;
@@ -79,7 +73,8 @@ import Currency from '@/currency'
     }
     &__info {
       color: #111;
-      padding: 1rem 0;
+      padding: 3rem 0;
+      font-size: 1.8rem;
 
       &.two {
         padding: 0 0 1rem 0;
@@ -87,8 +82,7 @@ import Currency from '@/currency'
 
       &-oldprice {
         text-decoration: line-through;
-        margin-right: .8
-        rem;
+        margin-right: .2rem;
         color: #111;
       }
       &-brand, &-price, &-oldprice {
@@ -97,7 +91,7 @@ import Currency from '@/currency'
     }
     &__button {
       width: 100%;
-      padding-top: 1rem;
+      padding: 2rem 0;
     }
     
   }

@@ -1,15 +1,15 @@
 <template>
-  <v-container app grid-list-sm>
+  <v-container app>
     <v-layout app>
-      <v-flex lg6>
-        <div v-for="(data, index) in generatedData" :key="index">
+      <v-flex lg6 class="v-flex-6">
+        <div v-for="(data, index) in generatedData" :key="index" class="components__div">
           <component 
           :is="components[compMethod(data.name)]" 
           v-bind="data"/>
         </div>
       </v-flex>
-      <v-flex lg6>
-       
+      <v-flex lg6 pa-2 text-sm-center>
+       Hello world
       </v-flex>
     </v-layout>
   </v-container>
@@ -71,5 +71,13 @@ import componentsData from '@/componentsData';
 </script>
 
 <style lang="scss" scoped>
-
+ 
+ .v-flex-6 {
+   overflow-y: scroll;
+   max-height: 60rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   scrollbar-color: $color-primary #111;
+ }
 </style>
