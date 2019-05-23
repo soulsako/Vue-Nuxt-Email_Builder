@@ -44,7 +44,7 @@
 
 <style lang="scss" scoped>
   .textandcta {
-    width: 100%;
+    width: 60rem;
     padding: 2.5rem;
     justify-content: space-evenly;
     display: flex;

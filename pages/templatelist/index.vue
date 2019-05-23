@@ -10,7 +10,18 @@
           class="app__img" 
           :style="{'background-image': 'url(' + require(`@/assets/images/templateImages/product/${template.image}`) + ')'}"
           aspect-ratio="1" 
-          width="100%"/>
+          width="100%">
+            <template v-slot:placeholder>
+              <v-layout
+                fill-height
+                align-center
+                justify-center
+                ma-0
+              >
+              <v-progress-circular indeterminate color="blue darken-1"></v-progress-circular>
+              </v-layout>
+            </template>
+          </v-img>
         </v-card>
       </v-flex>
     </v-layout>
@@ -43,14 +54,17 @@ import { mapGetters } from 'vuex'
       });
     }
   }
+ 
 </script>
 
 <style lang="scss" scoped>
   .app {
     
     &__img {
-      background-size: cover;
-      background-position: center;
+      // background-size: cover;
+      // background-position: center;
+      width: 100%;
+      display: block;
     }
   }
 

@@ -195,11 +195,11 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
       &-one, &-two {
         padding: 1.5rem;
         color: #fff;
-        width: 28rem;
-        display: flex;
-        flex-direction: column;
+        width: 29rem;
         transform: translate(-50%, -50%);
         position: absolute;
+        font-size: 1.8rem;
+        line-height: 2.8rem;
       }
 
       &-oldprice {

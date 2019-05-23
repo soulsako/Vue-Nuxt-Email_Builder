@@ -31,7 +31,7 @@
         </v-container>
     </v-content>
     <v-footer class="pa-4 dflex justify-center" dark app fixed>
-    <div>JD SPORTS. &copy; All Rights Reserved. {{ new Date().getFullYear() }}</div>
+    <div>JD SPORTS {{ new Date().getFullYear() }} &copy; All Rights Reserved. </div>
     </v-footer>
   </v-app>
 </template>

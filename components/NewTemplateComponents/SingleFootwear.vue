@@ -76,11 +76,7 @@ const booleanNotRequired = { required: false, default: () => false, type: Boolea
     }
 
     &__exclusive {
-      position: absolute;
-      top: 3rem;
-      left: 3rem;
-      width: 5rem;
-      height: 5rem;
+      @include exclusiveLogo;
 
       &-img {
         display: block;

@@ -86,7 +86,7 @@
         data4: {
           name: 'SingleApparel',
           multiple: false,
-          multipleSplit: true, 
+          multipleSplit: false, 
           sale: true, 
           women: false,
           invert: false,

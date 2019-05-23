@@ -24,3 +24,10 @@
   display: table;
   clear: both;
 }
+@mixin exclusiveLogo {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      width: 7.3rem;
+      height: 9rem;
+}
