@@ -9,6 +9,7 @@
 </template>
 
 <script>
+const stringNotRequired = { required: false, type: String }
   export default {
     name: 'HeaderImage', 
     props: {
@@ -16,14 +17,8 @@
         required: true, 
         type: String
       }, 
-      btnColor: {
-        required: false, 
-        type: String
-      }, 
-      btnBackground: {
-        required: false, 
-        type: String
-      }, 
+      btnColor: stringNotRequired, 
+      btnBackground: stringNotRequired, 
       sale: {
         required: false, 
         type: Boolean

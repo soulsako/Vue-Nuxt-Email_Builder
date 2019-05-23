@@ -65,11 +65,7 @@ import Currency from '@/currency'
     
 
     &__exclusive {
-      position: absolute;
-      top: 1.5rem;
-      left: 1.5rem;
-      width: 5rem;
-      height: 5rem;
+      @include exclusiveSmall;
 
       &-img {
       display: block;
@@ -87,8 +83,7 @@ import Currency from '@/currency'
 
       &-oldprice {
         text-decoration: line-through;
-        margin-right: .8
-        rem;
+        margin-right: .8rem;
         color: #111;
       }
       &-brand, &-price, &-oldprice {

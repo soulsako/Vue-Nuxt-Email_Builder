@@ -76,11 +76,7 @@ const booleanNotRequired = { required: false, default: () => false, type: Boolea
     }
 
     &__exclusive {
-      position: absolute;
-      top: 3rem;
-      left: 3rem;
-      width: 5rem;
-      height: 5rem;
+     @include exclusiveBig;
 
       &-img {
         display: block;
@@ -90,7 +86,7 @@ const booleanNotRequired = { required: false, default: () => false, type: Boolea
     &__bottom {
       @include flexCenterY;
       justify-content: space-between;
-      padding: 1.5rem 0;
+      padding: 3rem 0;
     }
     &__info {
         display: flex;
@@ -100,7 +96,7 @@ const booleanNotRequired = { required: false, default: () => false, type: Boolea
 
       &-oldprice {
         text-decoration: line-through;
-        margin-right: .8rem;
+        margin-right: .2rem;
         color: #111;
       }
       &-brand, &-price, &-oldprice {

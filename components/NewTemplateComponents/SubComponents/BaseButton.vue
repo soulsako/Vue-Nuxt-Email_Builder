@@ -25,8 +25,10 @@
   .button {
     width: 27rem;
     display: inline-block;
-    padding: 1.5rem 0;
+    padding: 1.8rem;
+    font-size: $font-size-1;
     text-transform: uppercase;
     text-align: center;
+    font-weight: bold;
   }
 </style>

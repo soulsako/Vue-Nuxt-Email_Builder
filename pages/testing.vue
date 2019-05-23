@@ -64,12 +64,12 @@
           url: 'http://jdsports.com/men', 
           btnColor: '', 
           btnBackground: '', 
-          sale: true
+          sale: false
         },
         data2:  {
           name: 'TextAndCta',
-          text: 'Accessories',
-          sale: true, 
+          text: "men's",
+          sale: false, 
         }, 
         data3: {
           name: 'SingleFootwear',
@@ -86,8 +86,8 @@
         data4: {
           name: 'SingleApparel',
           multiple: false,
-          multipleSplit: true, 
-          sale: true, 
+          multipleSplit: false, 
+          sale: false, 
           women: false,
           invert: false,
           exclusive: true,
@@ -105,7 +105,7 @@
         }, 
         data5: {
           name: 'TwoColumnApparel',
-          sale: true,
+          sale: false,
           height: '34.5',
           women: false,
           exclusive: true,
@@ -122,7 +122,7 @@
         }, 
         data6: {
           name: 'TwoColumnFootwear',
-          sale: true,
+          sale: false,
           height: '19',
           women: true,
           exclusive: true,
@@ -140,7 +140,7 @@
         data7: {
           name: 'TwoColumnFullApparel',
           full: true,
-          sale: true,
+          sale: false,
           height: '53',
           women: true,
           exclusive: true,
@@ -163,7 +163,7 @@
         }, 
         data8: {
           name: 'PostCardStyle',
-          sale: true,
+          sale: false,
           height: '34.5',
           women: true,
           exclusive: true,
@@ -183,23 +183,23 @@
         }, 
         data9: {
           name: 'Text',
-          text: 'Accessories', 
-          sale: true
+          text: "men's", 
+          sale: false
         },
         data10:{
           name: 'TextCta',
-          text: 'Accessories',
+          text: "men's",
           button: true, 
-          sale: true, 
+          sale: false, 
           btnColor: '#111', 
           btnBackground: '#fff'
         },
         data11:{
           name: 'TextLogoCta',
-          text: 'Accessories',
+          text: "men's",
           button: true, 
           logo: 'https://i8.amplience.net/t/jpl/jd_product_list?plu=jd_140351_a&qlt=80&wid=270&hei=345', 
-          sale: true, 
+          sale: false, 
           btnColor: '#111', 
           btnBackground: '#fff'
         }
