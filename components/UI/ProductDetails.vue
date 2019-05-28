@@ -16,7 +16,6 @@
           <v-text-field
             v-model="url"
             label="Enter Product URL"
-            required
           ></v-text-field>
         </v-flex>
 
@@ -31,13 +30,20 @@
   export default {
     data(){
       return {
-        plu: '', 
+        plus: ['53523'], 
         url: '' 
       }
     }, 
     methods: { 
       submitPlu(){
-        //Mutate the store to update product details 
+        this.$axios.$post('/api/submitplu', {
+          plus: this.plus,
+          iso: 'gb',
+          site: 'jdsports'
+          })
+        .then(response => {
+          console.log(response);
+        })
       }
     }
   }

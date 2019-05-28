@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-const WomenTemplates = require('../models/mentemplates');
+const WomenTemplates = require('../models/womentemplates');
 
 router.get('/fascia/:id', (req, res) => {
 

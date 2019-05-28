@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const menTemplatesSchema = mongoose.Schema({
+const womenTemplatesSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   template_type: String,
   templates: Array,
@@ -10,4 +10,4 @@ const menTemplatesSchema = mongoose.Schema({
   createdOn: { type: Date, default: Date.now },
 }, { versionKey: false });
 
-module.exports = mongoose.model('mentemplates', menTemplatesSchema);
+module.exports = mongoose.model('womentemplates', womenTemplatesSchema);

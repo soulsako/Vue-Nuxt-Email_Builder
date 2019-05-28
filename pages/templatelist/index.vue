@@ -68,7 +68,6 @@ import { mapGetters } from 'vuex'
     }
   }
   .v-card-title {
-    @include theme-1;
     color: #fff;
     text-transform: uppercase;
     padding: 1rem;

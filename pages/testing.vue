@@ -52,6 +52,7 @@
     v-bind="data11"/>
 
   </div>
+  
 </template>
 
 <script>

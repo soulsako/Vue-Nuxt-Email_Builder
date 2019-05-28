@@ -37,12 +37,4 @@
   width: 7.3rem;
   height: 9rem;
 }
-@mixin theme-1 {
-  background: linear-gradient(to left top, $color-primary, $color-primary-dark);
-}
-@mixin theme-2 {
-  background: linear-gradient(to left top, $color-secondary-light, $color-secondary-dark);
-}
-@mixin theme-3 {
-  background: linear-gradient(to left top, $color-tertiary-light, $color-tertiary-dark);
-}
+

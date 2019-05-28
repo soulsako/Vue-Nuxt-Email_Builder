@@ -2,15 +2,15 @@
 <v-stepper v-model="e1">
   <v-stepper-header>
 
-    <v-stepper-step :complete="e1 > 1" step='1'>Select Fascia</v-stepper-step>
+    <v-stepper-step :complete="e1 > 1" step='1' color="red darken-1">Select Fascia</v-stepper-step>
 
     <v-divider></v-divider>
 
-    <v-stepper-step :complete="e1 > 2" step="2">Select Category</v-stepper-step>
+    <v-stepper-step :complete="e1 > 2" step="2" color="red darken-1">Select Category</v-stepper-step>
 
     <v-divider></v-divider>
 
-    <v-stepper-step :complete="e1 > 3" step="3">Select Template Type</v-stepper-step>
+    <v-stepper-step :complete="e1 > 3" step="3" color="red darken-1">Select Template Type</v-stepper-step>
 
   </v-stepper-header>
 
@@ -26,7 +26,7 @@
               lg1>
                 <v-card 
                 class='app__card' 
-                @click="cardClicked({id: fascia._id, type: 'fascia', fasciaType: fascia.fascia_name})"
+                @click="slideCard({ id: fascia._id, type: 'fascia' })"
                 :dark="fascia.isSelected"
                 flat>
                 <v-img
@@ -51,9 +51,9 @@
             class="white--text app__card"
             hover
             height="200"
-            @click="cardClicked({id: category._id, type: 'category', categoryType: category.category_name})">
+            @click="slideCard({ id: category._id, type: 'category', name:  category.category_name})">
               <div class="centerText">
-                <v-icon large>{{category.icon}}</v-icon>
+                <v-icon large dark>{{category.icon}}</v-icon>
                 <v-card-title primary-title>
                   <div class="headline">
                     {{ category.category_name }}
@@ -61,24 +61,35 @@
               </v-card-title>
               </div>
             </v-card>
-
           </v-flex>
         </v-layout>
       </v-container>
-      <v-btn color="primary" @click="e1 = 1">Back</v-btn>
+      <v-btn color="red darken-1" dark @click="e1 = 1">Back</v-btn>
     </v-stepper-content>
     <!-- SELECT TEMPLATE TYPE -->
     <v-stepper-content step="3">
       <v-container fluid grid-list-lg>
         <v-layout app wrap>
-          <v-flex lg4 v-for="type in templateType" :key="type">
-            <v-card class="mb-5 app__card" @click="nextStep(type.toLowerCase())">
-              <v-card-title>{{ type }}</v-card-title>
+          <v-flex lg4 v-for="template in templateTypes" :key="template.id">
+            <v-card 
+            :color="template.background" 
+            class="white--text app__card"
+            hover
+            height="200"
+            @click="slideCard({id: template.id, type: 'templateType'})">
+              <div class="centerText">
+                <v-icon large dark>{{template.icon}}</v-icon>
+                <v-card-title primary-title>
+                  <div class="headline">
+                    {{ template.type }}
+              </div>
+              </v-card-title>
+              </div>
             </v-card>
           </v-flex>
         </v-layout>
       </v-container>
-      <v-btn color="primary" @click="e1 = 2">Back</v-btn>
+      <v-btn color="red darken-1" dark @click="e1 = 2">Back</v-btn>
     </v-stepper-content>
 
   </v-stepper-items>
@@ -94,34 +105,45 @@ export default {
   
     data(){
       return {
-        e1: 1
+        e1: 1,
+        templateTypes: []
+
       }
     },
     computed: {
       ...mapGetters([
         'getCategories', 
         'getFascias', 
-        'getTemplateTypes'
+        // 'getTemplateTypes'
       ])
     }, 
     methods: {
-      cardClicked(data){
-        let url;
-       if(data.type === 'category'){
-         url = data.categoryType === 'men & kids' ? `/api/mentemplates${data.id}` : `/api/womentemplates/${data.id}`
-         this.$axios.get(url)
+      slideCard(data){
+        if(data.type === 'fascia'){
+          this.e1 = 2;
+        }else if(data.type === 'category'){
+          this.isLoading = true;
+          let url;
+          url = data.name === 'Women' ? '/api/womentemplates/all' : '/api/mentemplates/all'
+          this.$axios.$get(url)
          .then(response => {
-           console.log(response);
-           this.e1 = data.type === 'fascia' ?  2 : 3
+           const templateTypes = response.map(curr => {
+             return {
+               id: curr._id,
+               type: curr.template_type, 
+               background: curr.background_color, 
+               icon: curr.icon 
+               }
+           });
+           this.templateTypes = templateTypes;
+            this.e1 = 3;
          });
-       }
-       this.$store.commit('setSelected', data);
-      }, 
-      nextStep(data) {
+        }else {
+          this.$router.push('/templatelist');
+        }
         this.$store.commit('setSelected', data);
-        this.$router.push('/templatelist');
       }
-    }
+    },
   }
 </script>
 

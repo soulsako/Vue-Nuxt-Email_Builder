@@ -34,12 +34,12 @@ export const mutations = {
     let type, typeString;
     if(data.type === 'fascia'){
       [type, typeString ] = [[...state.fascias], 'fascias'];
-      state.templateInfo.fascia = data.fasciaType;
+      state.templateInfo.fascia = data.id;
     }else if(data.type === 'category'){
       [type, typeString] = [[...state.categories], 'categories'];
-      state.templateInfo.category = data.categoryType;
-    }else {
-      return state.templateInfo.type = data;
+      state.templateInfo.category = data.id;
+    }else if(data.type === 'category'){
+      return state.templateInfo.type = data.id;
     }
     const index = type.findIndex(curr => curr._id === data.id)
     type[index].isSelected = type[index].isSelected ? false : true;

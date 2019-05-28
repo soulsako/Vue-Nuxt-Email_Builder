@@ -21,7 +21,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar class="v-toolbar" app fixed dark>
+    <v-toolbar app fixed dark color="red lighten-1">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>JD Email Builder</v-toolbar-title>
     </v-toolbar>
@@ -74,8 +74,6 @@ export default {
 </script>
 
 <style lang='scss'>
-  .v-toolbar {
-    @include theme-1;
-  }
+ 
 </style>
 
