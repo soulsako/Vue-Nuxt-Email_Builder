@@ -94,7 +94,8 @@ export default {
   
     data(){
       return {
-        e1: 1
+        e1: 1, 
+        templateType: ['product', 'sale', 'launch']
       }
     },
     computed: {
@@ -106,15 +107,7 @@ export default {
     }, 
     methods: {
       cardClicked(data){
-        let url;
-       if(data.type === 'category'){
-         url = data.categoryType === 'men & kids' ? `/api/mentemplates${data.id}` : `/api/womentemplates/${data.id}`
-         this.$axios.get(url)
-         .then(response => {
-           console.log(response);
-           this.e1 = data.type === 'fascia' ?  2 : 3
-         });
-       }
+       this.e1 = data.type === 'fascia' ?  2 : 3
        this.$store.commit('setSelected', data);
       }, 
       nextStep(data) {
