@@ -15,12 +15,12 @@
       <!-- Only show old price if sale prop is true -->
       <div class="singlefootwear__info--price">
       <span v-if="sale" class="singlefootwear__info-oldprice">{{ currency.gb}}{{ oldPrice }}</span>
-      <span :style="{color: priceColor}" class="singlefootwear__info-price">{{ currency.gb}}{{ price }}</span>
+      <span :style="{color: compPriceColor}" class="singlefootwear__info-price">{{ currency.gb}}{{ price }}</span>
       </div>
     </div>
         <BaseButton
-        :color="btnColor"
-        background="#fff"
+        :color="compBtnColor"
+        :background="btnBackground"
         >Shop now</BaseButton>
     </div>
   </div>
@@ -31,6 +31,7 @@ import ExclusiveImage from '@/exclusive'
 import Currency from '@/currency'
 const stringRequired = { required: true, type: String }
 const booleanNotRequired = { required: false, default: () => false, type: Boolean }
+const stringNotRequired = {required: false, type: String}
   export default {
     data() {
       return {
@@ -45,21 +46,22 @@ const booleanNotRequired = { required: false, default: () => false, type: Boolea
       description: stringRequired,
       url: stringRequired, 
       exclusive: booleanNotRequired, 
-      price: stringRequired, 
-      oldPrice: {
-        required: false, 
-        type: String
-      }
+      price: stringRequired,
+      priceColor: stringNotRequired, 
+      oldPrice: stringNotRequired, 
+      button: booleanNotRequired, 
+      btnColor: stringNotRequired, 
+      btnBackground: stringNotRequired
     }, 
     computed: {
       exclusiveImg(){
         return this.women ? ExclusiveImage.gb.women : ExclusiveImage.gb.men
       }, 
-      btnColor(){
-        return this.sale ? '#e72933' : '#111'
+      compBtnColor(){
+        return this.sale ? '#e72933' : this.btnColor
       }, 
-      priceColor(){
-        return this.sale ? '#e72933' : '#111'
+      compPriceColor(){
+        return this.sale ? '#e72933' : this.priceColor
       }
     }
   }

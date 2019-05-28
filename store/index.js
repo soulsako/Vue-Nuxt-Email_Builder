@@ -1,5 +1,3 @@
-// import menComponents from '@/components'
-
 export const state = () => ({
   fascias: [], 
   categories: [],
@@ -29,23 +27,40 @@ export const mutations = {
   setFascias: (state, fascias) => state.fascias = fascias,
 
   setTemplates: (state, templates) => state.templates = templates,
-
+  
   setComponentsData: (state, data) => state.componentsData = data,
 
   setSelected: (state, data) => {
     let type, typeString;
     if(data.type === 'fascia'){
       [type, typeString ] = [[...state.fascias], 'fascias'];
-      state.templateInfo.fascia = data.type;
+      state.templateInfo.fascia = data.fasciaType;
     }else if(data.type === 'category'){
       [type, typeString] = [[...state.categories], 'categories'];
-      state.templateInfo.category = data.type;
+      state.templateInfo.category = data.categoryType;
     }else {
       return state.templateInfo.type = data;
     }
     const index = type.findIndex(curr => curr._id === data.id)
     type[index].isSelected = type[index].isSelected ? false : true;
     state[typeString] = type;
+  }, 
+  setTemplateInfo: (state, info) => state.templateInfo = info, 
+
+  setButtonStyles: (state, styles) => {
+    if(styles.allButtons === 'all' && styles.styleProp === 'text'){
+      state.componentsData.forEach(curr => {
+        curr.button ? curr.btnColor = styles.color : null
+      })
+    }else if(styles.allButtons === 'all' && styles.styleProp === 'background'){
+      state.componentsData.forEach(curr => {
+        curr.button ? curr.btnBackground = styles.color : null
+      })
+    }else if(styles.styleProp === 'price'){
+      state.componentsData.forEach(curr => {
+        curr.hasPrice ? curr.priceColor = styles.color : null
+      })
+    }
   }
 }
 // Set Master data to store state
@@ -64,4 +79,5 @@ export const actions = {
     })
   }
 }
+
 

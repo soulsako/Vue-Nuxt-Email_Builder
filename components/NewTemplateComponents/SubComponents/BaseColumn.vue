@@ -20,7 +20,7 @@
       <!-- Only show old price if sale prop is true -->
       <div class="column__info--price">
       <span v-if="sale" class="column__info-oldprice">{{ currency.gb}}{{ oldPrice }}</span>
-      <span :style="{color: priceColor}" class="column__info-price">{{ currency.gb}}{{ price }}</span>
+      <span :style="{color: compPriceColor}" class="column__info-price">{{ currency.gb}}{{ price }}</span>
       </div>
     </div>
 
@@ -29,7 +29,7 @@
       <!-- Only show old price if sale prop is true -->
       <div class="column__info--price">
       <span v-if="sale" class="column__info-oldprice">{{ currency.gb}}{{ oldPriceTwo }}</span>
-      <span :style="{color: priceColor}" class="column__info-price">{{ currency.gb}}{{ priceTwo }}</span>
+      <span :style="{color: compPriceColor}" class="column__info-price">{{ currency.gb}}{{ priceTwo }}</span>
       </div>
     </div>
   </div>
@@ -44,13 +44,19 @@ import Currency from '@/currency'
         currency: Currency
       }
     },
-    props: ['height', 'sale', 'women', 'exclusive', 'full', 'button', 'buttonText', 'brand', 'description', 'price', 'oldPrice', 'src', 'descriptionTwo', 'oldPriceTwo', 'priceTwo'], 
+    props: ['height', 'sale', 'women', 'exclusive', 'full', 'button', 'buttonText', 'brand', 'description', 'price', 'oldPrice', 'src', 'descriptionTwo', 'oldPriceTwo', 'priceTwo', 'priceColor'], 
     computed: {
       exclusiveImg(){
         return this.women ? ExclusiveImage.gb.women : ExclusiveImage.gb.men
       }, 
-      priceColor(){
-        return this.sale ? '#e72933' : '#111'
+      compPriceColor(){
+        if(this.priceColor){
+          return this.priceColor
+        }else if(this.sale){
+          return '#e72933'
+        }else {
+          return '#111'
+        }
       }
     }
   }

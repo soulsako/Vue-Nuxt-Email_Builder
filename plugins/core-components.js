@@ -8,6 +8,9 @@ import SingleApparel from '@/components/NewTemplateComponents/SingleApparel.vue'
 import SingleFootwear from '@/components/NewTemplateComponents/SingleFootwear.vue'
 import TwoColumn from '@/components/NewTemplateComponents/TwoColumn.vue'
 import TextAndCta from '@/components/NewTemplateComponents/TextAndCta.vue'
+import ProductDetails from '@/components/UI/ProductDetails.vue'
+import ProductStyles from '@/components/UI/ProductStyles.vue'
+import { Sketch } from 'vue-color';
 
 
 Vue.component('BaseButton', BaseButton);
@@ -17,3 +20,8 @@ Vue.component('SingleApparel', SingleApparel);
 Vue.component('SingleFootwear', SingleFootwear);
 Vue.component('TwoColumn', TwoColumn);
 Vue.component('TextAndCta', TextAndCta);
+Vue.component('ProductDetails', ProductDetails);
+Vue.component('ProductStyles', ProductStyles);
+Vue.component('sketch-picker', Sketch);
+
+

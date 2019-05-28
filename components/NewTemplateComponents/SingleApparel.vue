@@ -41,7 +41,7 @@
 import ExclusiveImage from '@/exclusive'
 import Currency from '@/currency'
 import interact from 'interactjs'
-const stringFalse = {type: String, required: false}
+const stringNotRequired = {type: String, required: false}
 const stringTrue = {type: String, required: true}
 const falseBoolean = {required: false, default: () => false, type: Boolean}
 
@@ -64,11 +64,11 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
       exclusive: falseBoolean,  
       invert: falseBoolean,
       price: stringTrue,
-      oldPrice: stringFalse, 
-      priceTwo: stringFalse, 
-      oldPriceTwo: stringFalse, 
-      color: stringFalse, 
-      backgroundColor: stringFalse
+      oldPrice: stringNotRequired, 
+      priceTwo: stringNotRequired, 
+      oldPriceTwo: stringNotRequired, 
+      color: stringNotRequired, 
+      backgroundColor: stringNotRequired
     }, 
     computed: {
       exclusiveImg(){
@@ -98,7 +98,7 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
         return this.multipleSplit ? '6rem' : '4rem'
       }, 
       rightOrLeft(){
-        return this.invert ? {left: '25%'} : {right: '-25%'}
+        return this.invert ? {left: '26%'} : {right: '-26%'}
       }
     },
     methods: {

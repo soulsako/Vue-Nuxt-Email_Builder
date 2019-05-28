@@ -26,7 +26,7 @@
               lg1>
                 <v-card 
                 class='app__card' 
-                @click="cardClicked({id: fascia._id, type: 'fascia'})"
+                @click="cardClicked({id: fascia._id, type: 'fascia', fasciaType: fascia.fascia_name})"
                 :dark="fascia.isSelected"
                 flat>
                 <v-img
@@ -39,31 +39,33 @@
           </v-layout>
         </v-container>
       </v-card>
-      <v-btn color="primary" @click="e1 = 2">Continue</v-btn>
     </v-stepper-content>
     <!-- SELECT CATEGORY -->
     <v-stepper-content step="2">
       <v-container px-0 py-4 fluid grid-list-lg>
         <v-layout app wrap justify-center>
           <v-flex lg4 v-for='category in getCategories' :key='category._id'>
-            <v-card class='app__card mb-5' 
-              @click="cardClicked({id: category._id, type: 'category'})"
-              hover>
-              <v-img
-              class="app__img"
-              aspect-ratio="1"
-              :style="{'background-image': 'url(' + require(`../assets/images/${category.background_image}`) + ')'}"
-              >
-              </v-img>
-              <v-card-title primary-title class="app__card-title text-uppercase">
-                <h3 class="display-1 white--text">{{ category.category_name }}</h3>
+
+            <v-card 
+            :color="category.background_color" 
+            class="white--text app__card"
+            hover
+            height="200"
+            @click="cardClicked({id: category._id, type: 'category', categoryType: category.category_name})">
+              <div class="centerText">
+                <v-icon large>{{category.icon}}</v-icon>
+                <v-card-title primary-title>
+                  <div class="headline">
+                    {{ category.category_name }}
+              </div>
               </v-card-title>
+              </div>
             </v-card>
+
           </v-flex>
         </v-layout>
       </v-container>
-      <v-btn color="primary" @click="e1 = 3">Continue</v-btn>
-      <v-btn color="error" @click="e1 = 1">Back</v-btn>
+      <v-btn color="primary" @click="e1 = 1">Back</v-btn>
     </v-stepper-content>
     <!-- SELECT TEMPLATE TYPE -->
     <v-stepper-content step="3">
@@ -76,8 +78,7 @@
           </v-flex>
         </v-layout>
       </v-container>
-      <v-btn color="primary" @click="e1 = 1">Continue</v-btn>
-      <v-btn color="error" @click="e1 = 2">Back</v-btn>
+      <v-btn color="primary" @click="e1 = 2">Back</v-btn>
     </v-stepper-content>
 
   </v-stepper-items>
@@ -89,22 +90,31 @@
 import { mapGetters } from 'vuex';
   
 export default {
-  name: 'homePage',
+  name: 'HomePage',
   
     data(){
       return {
-        e1: 1, 
-        templateType: ['Product', 'Sale', 'Launch']
+        e1: 1
       }
     },
     computed: {
       ...mapGetters([
         'getCategories', 
-        'getFascias'
+        'getFascias', 
+        'getTemplateTypes'
       ])
     }, 
     methods: {
       cardClicked(data){
+        let url;
+       if(data.type === 'category'){
+         url = data.categoryType === 'men & kids' ? `/api/mentemplates${data.id}` : `/api/womentemplates/${data.id}`
+         this.$axios.get(url)
+         .then(response => {
+           console.log(response);
+           this.e1 = data.type === 'fascia' ?  2 : 3
+         });
+       }
        this.$store.commit('setSelected', data);
       }, 
       nextStep(data) {
@@ -118,10 +128,6 @@ export default {
 <style lang='scss' scoped>
   .app__card {
     cursor: pointer;
-    transition: all .2s;
-    &:hover {
-      opacity: .7;
-    }
     &-title {
       @include centerText;
     }
@@ -129,6 +135,11 @@ export default {
   .app__img {
     background-size: cover;
     background-position: center;
+  }
+  .centerText {
+    @include centerText;
+    text-transform: uppercase;
+    text-align: center;
   }
 </style>
 

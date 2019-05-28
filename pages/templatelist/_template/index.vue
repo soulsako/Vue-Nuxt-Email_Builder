@@ -1,15 +1,52 @@
 <template>
-  <v-container app>
-    <v-layout app>
-      <v-flex lg6 class="v-flex-6">
-        <div v-for="(data, index) in generatedData" :key="index" class="components__div">
+  <v-container fluid>
+    <v-layout app white elevation-8>
+      <v-flex lg7 class="v-flex-6">
+        <div 
+        v-for="(data, index) in getComponentsData" 
+        :key="index" 
+        class="components__div mb-3"
+        >
           <component 
           :is="components[compMethod(data.name)]" 
           v-bind="data"/>
         </div>
       </v-flex>
-      <v-flex lg6 pa-2 text-sm-center>
-       Hello world
+      <v-flex lg5 pa-2 text-sm-center>
+        <v-tabs
+          centered
+          color="blue-grey darken-4"
+          dark
+          icons-and-text>
+          <v-tabs-slider color="success"></v-tabs-slider>
+
+          <v-tab href="#tab-1">
+            Details
+            <v-icon>details</v-icon>
+          </v-tab>
+
+          <v-tab href="#tab-2">
+            Styles
+            <v-icon>invert_colors</v-icon>
+          </v-tab>
+
+          <v-tab-item
+            value="tab-1"
+          >
+            <v-card flat>
+              <ProductDetails />
+            </v-card>
+          </v-tab-item>
+
+          <v-tab-item
+            value="tab-2"
+          >
+            <v-card flat>
+              <ProductStyles />
+            </v-card>
+          </v-tab-item>
+
+        </v-tabs>
       </v-flex>
     </v-layout>
   </v-container>
@@ -17,12 +54,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import componentsData from '@/componentsData';
-  export default {
-    
+import jsonData from '@/componentsData.json';
+  export default { 
     data(){
       return {
-        generatedData: [],
         components: {
           HeaderImage: 'HeaderImage', 
           SingleApparel: 'SingleApparel',
@@ -30,16 +65,19 @@ import componentsData from '@/componentsData';
           TextAndCta: 'TextAndCta',
           TwoColumn: 'TwoColumn'
         }, 
-        color: ''
+        componentsData: [],
+        jsonData: jsonData
       }
     }, 
     computed: {
       ...mapGetters([
         'getTemplates', 
-        'getTemplateInfo'
+        'getTemplateInfo', 
+        'getComponentsData'
       ])
     },
     methods: {
+      // Render same component for many different names in the database
        compMethod(name){
         if(name === 'TwoColumnApparel'|| name === 'TwoColumnFootwear'){
           return 'TwoColumn'
@@ -47,24 +85,29 @@ import componentsData from '@/componentsData';
         return name;
       }
     },
-    created(){
-      // console.log(this.getTemplateInfo.type);
-      this.componentsData = componentsData(this.getTemplateInfo.type);
-      //Loop through the templates in store and get the current template using params.query
+    mounted(){
+      let newComponents;
+      if(this.getTemplateInfo.type === 'sale'){
+        newComponents = this.jsonData.map(component => {
+          component.sale = true;
+          return component;
+        })
+        this.jsonData = newComponents;
+      }
+      //filter templates in store and get the current template using params.query
       const currentTemplate = this.getTemplates.filter(template => {
           return template.name === this.$route.params.template;
       });
       //Generate data from components.js file for each component in the currentTemplate.components array
       const generateCompData = currentTemplate[0].components.map(name => {
         let arr;
-            this.componentsData.forEach(dataComponent => {
+            this.jsonData.forEach(dataComponent => {
             if(dataComponent.name === name){
               arr = dataComponent;
             }
           })
         return arr;
       });
-      this.generatedData = generateCompData;
       this.$store.commit('setComponentsData', generateCompData);
     }
   }
@@ -74,10 +117,13 @@ import componentsData from '@/componentsData';
  
  .v-flex-6 {
    overflow-y: scroll;
-   max-height: 60rem;
+   max-height: 70rem;
+   overflow-x: hidden;
    display: flex;
    flex-direction: column;
    align-items: center;
-   scrollbar-color: $color-primary #111;
+ }
+ .components__div {
+   border: 3px solid $color-primary;
  }
 </style>

@@ -8,8 +8,10 @@ const winston = require('winston')
 const cookieParser = require('cookie-parser')
 // Import route files
 const categoryRoutes = require('./routes/categoryRoutes')
+
 const fasciaRoutes = require('./routes/fasciaRoutes')
-const templateRoutes = require('./routes/templateRoutes')
+const menTemplateRoutes = require('./routes/menTemplateRoutes')
+const womenTemplateRoutes = require('./routes/womenTemplateRoutes')
 
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
@@ -49,7 +51,8 @@ app.use((req, res, next) => {
 // All Routes 
 app.use('/api/categories', categoryRoutes);
 app.use('/api/fascias', fasciaRoutes);
-app.use('/api/mentemplates', templateRoutes);
+app.use('/api/mentemplates', menTemplateRoutes);
+app.use('/api/womentemplates', womenTemplateRoutes);
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')

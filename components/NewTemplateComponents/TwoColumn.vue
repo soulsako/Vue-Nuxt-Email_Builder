@@ -15,7 +15,8 @@
       :oldPrice="oldPrice"
       :descriptionTwo="descriptionThree"
       :priceTwo="priceThree"
-      :oldPriceTwo="oldPriceThree"
+      :oldPriceTwo="oldPriceThree" 
+      :priceColor="priceColor"
       :src="src"/>
     </div>
     
@@ -34,6 +35,7 @@
       :descriptionTwo="descriptionFour"
       :priceTwo="priceFour"
       :oldPriceTwo="oldPriceFour"
+      :priceColor="priceColor"
       :src="srcTwo"/>
   </div>
 </template>
@@ -67,7 +69,8 @@ const stringNotRequired = {required: false, type: String}
       priceThree: stringNotRequired, 
       priceFour: stringNotRequired, 
       oldPriceThree: stringNotRequired, 
-      oldPriceFour: stringNotRequired
+      oldPriceFour: stringNotRequired,
+      priceColor: stringNotRequired
     }
   }
 </script>
