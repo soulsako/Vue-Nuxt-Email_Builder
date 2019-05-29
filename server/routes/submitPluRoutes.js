@@ -5,7 +5,7 @@ const fredHopper = require('../services/fredHopper')
 route.post('/', (req, res) => {
   const data = req.body;
 
-  const location = fredhopper.getAccess(data.site, data.iso).pop();
+  const location = fredHopper.getAccess(data.site, data.iso).pop();
 
   if (!location) {
     return res.json({
@@ -33,7 +33,7 @@ route.post('/', (req, res) => {
     plus = splitPlus.map(plu => `${plu}_${fhLocation}`).join(',');
   }
 
-  return fredhopper
+  return fredHopper
     .query({
         site: data.site,
         location,
@@ -58,7 +58,7 @@ route.post('/', (req, res) => {
       cleanItems.products = [];
 
       dirtyObj.products.forEach(product =>
-        cleanItems.products.push(fredhopper.cleanProductData(product))
+        cleanItems.products.push(fredHopper.cleanProductData(product))
       );
 
       return {

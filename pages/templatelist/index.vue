@@ -3,7 +3,7 @@
     <v-layout app wrap>
       <v-flex lg4 v-for="(template, index) in templates" :key="index">
         <v-card :hover="true" :to="`/templatelist/${template.name}`">
-          <v-card-title class="justify-center v-card-title">
+          <v-card-title class="justify-center v-card-title red lighten-1">
             <p>{{template.title}}</p>
           </v-card-title>
           <v-img
@@ -11,16 +11,6 @@
           :style="{'background-image': 'url(' + require(`@/assets/images/templateImages/product/${template.image}`) + ')'}"
           aspect-ratio="1" 
           width="100%">
-            <template v-slot:placeholder>
-              <v-layout
-                fill-height
-                align-center
-                justify-center
-                ma-0
-              >
-              <v-progress-circular indeterminate color="blue darken-1"></v-progress-circular>
-              </v-layout>
-            </template>
           </v-img>
         </v-card>
       </v-flex>
@@ -42,7 +32,7 @@ import { mapGetters } from 'vuex'
       ])
     }, 
     created(){
-      this.$axios.$get(`/api/mentemplates/${this.getTemplateInfo.type}`)
+      this.$axios.$get(`/api/${this.getTemplateInfo.category}/${this.getTemplateInfo.type.id}`)
       .then(response => {
         //Extract the information needed for this component 
         const templates = response.templates.map(template => {

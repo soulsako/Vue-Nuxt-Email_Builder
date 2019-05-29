@@ -8,8 +8,8 @@ import SingleApparel from '@/components/NewTemplateComponents/SingleApparel.vue'
 import SingleFootwear from '@/components/NewTemplateComponents/SingleFootwear.vue'
 import TwoColumn from '@/components/NewTemplateComponents/TwoColumn.vue'
 import TextAndCta from '@/components/NewTemplateComponents/TextAndCta.vue'
-import ProductDetails from '@/components/UI/ProductDetails.vue'
-import ProductStyles from '@/components/UI/ProductStyles.vue'
+import ProductDetails from '@/components/FormInputs/ProductDetails.vue'
+import ProductStyles from '@/components/FormInputs/ProductStyles.vue'
 import { Sketch } from 'vue-color';
 
 

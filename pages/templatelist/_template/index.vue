@@ -6,10 +6,12 @@
         v-for="(data, index) in getComponentsData" 
         :key="index" 
         class="components__div mb-3"
+        @click="onComponentSelect({name: data.name, index: index})"
         >
           <component 
           :is="components[compMethod(data.name)]" 
-          v-bind="data"/>
+          v-bind="data"
+          />
         </div>
       </v-flex>
       <v-flex lg5 pa-2 text-sm-center>
@@ -34,7 +36,7 @@
             value="tab-1"
           >
             <v-card flat>
-              <ProductDetails />
+              <ProductDetails v-if="showPluInput"/>
             </v-card>
           </v-tab-item>
 
@@ -66,7 +68,8 @@ import jsonData from '@/componentsData.json';
           TwoColumn: 'TwoColumn'
         }, 
         componentsData: [],
-        jsonData: jsonData
+        jsonData: jsonData, 
+        showPluInput: false
       }
     }, 
     computed: {
@@ -83,11 +86,15 @@ import jsonData from '@/componentsData.json';
           return 'TwoColumn'
         }
         return name;
+      }, 
+      onComponentSelect(compData){
+        this.$store.commit('setCurrentComponent', compData);
+        this.showPluInput = true;
       }
     },
     mounted(){
       let newComponents;
-      if(this.getTemplateInfo.type === 'sale'){
+      if(this.getTemplateInfo.type.name === 'sale'){
         newComponents = this.jsonData.map(component => {
           component.sale = true;
           return component;
@@ -125,5 +132,6 @@ import jsonData from '@/componentsData.json';
  }
  .components__div {
    border: 3px solid $color-primary;
+   cursor: pointer;
  }
 </style>

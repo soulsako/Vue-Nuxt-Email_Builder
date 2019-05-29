@@ -6,7 +6,14 @@ export const state = () => ({
     // Persist this bit of information in local storage
     fascia: '', 
     category: '',
-    type: ''
+    type: {
+      id: '',
+      name: ''
+    }, 
+    currentComponent: {
+      name: '', 
+      index: null
+    }
   }, 
   componentsData: []
 });
@@ -17,7 +24,8 @@ export const getters = {
   getCategories: state => state.categories, 
   getTemplates: state => state.templates,
   getTemplateInfo: state => state.templateInfo, 
-  getComponentsData: state => state.componentsData
+  getComponentsData: state => state.componentsData,
+  getCurrentComponent: state => state.currentComponent
 }
 
 export const mutations = {
@@ -31,21 +39,17 @@ export const mutations = {
   setComponentsData: (state, data) => state.componentsData = data,
 
   setSelected: (state, data) => {
-    let type, typeString;
+    const isState = state.templateInfo
     if(data.type === 'fascia'){
-      [type, typeString ] = [[...state.fascias], 'fascias'];
-      state.templateInfo.fascia = data.id;
+      return isState.fascia = data.id;
     }else if(data.type === 'category'){
-      [type, typeString] = [[...state.categories], 'categories'];
-      state.templateInfo.category = data.id;
-    }else if(data.type === 'category'){
-      return state.templateInfo.type = data.id;
+      return isState.category = data.mapTemplates;
+    }else {
+      isState.type.id = data.id;
+      isState.type.name = data.name;
+      return;
     }
-    const index = type.findIndex(curr => curr._id === data.id)
-    type[index].isSelected = type[index].isSelected ? false : true;
-    state[typeString] = type;
   }, 
-  setTemplateInfo: (state, info) => state.templateInfo = info, 
 
   setButtonStyles: (state, styles) => {
     if(styles.allButtons === 'all' && styles.styleProp === 'text'){
@@ -61,6 +65,11 @@ export const mutations = {
         curr.hasPrice ? curr.priceColor = styles.color : null
       })
     }
+  }, 
+
+  setCurrentComponent: (state, compData) => {
+    state.currentComponent.name = compData.name;
+    state.currentComponent.index = compData.index;
   }
 }
 // Set Master data to store state

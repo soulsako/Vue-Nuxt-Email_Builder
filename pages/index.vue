@@ -26,7 +26,7 @@
               lg1>
                 <v-card 
                 class='app__card' 
-                @click="slideCard({ id: fascia._id, type: 'fascia' })"
+                @click="slideCard({ id: fascia._id, type: 'fascia', name: fascia.fascia_name })"
                 :dark="fascia.isSelected"
                 flat>
                 <v-img
@@ -51,7 +51,7 @@
             class="white--text app__card"
             hover
             height="200"
-            @click="slideCard({ id: category._id, type: 'category', name:  category.category_name})">
+            @click="slideCard({ id: category._id, type: 'category', mapTemplates: category.map_templates})">
               <div class="centerText">
                 <v-icon large dark>{{category.icon}}</v-icon>
                 <v-card-title primary-title>
@@ -76,7 +76,7 @@
             class="white--text app__card"
             hover
             height="200"
-            @click="slideCard({id: template.id, type: 'templateType'})">
+            @click="slideCard({id: template.id, name: template.type, type: 'templateType'})">
               <div class="centerText">
                 <v-icon large dark>{{template.icon}}</v-icon>
                 <v-card-title primary-title>
@@ -105,14 +105,8 @@ export default {
   
     data(){
       return {
-<<<<<<< HEAD
         e1: 1,
-        templateTypes: []
-
-=======
-        e1: 1, 
-        templateType: ['product', 'sale', 'launch']
->>>>>>> 85ca9b1b47e565d72e36e0f4b3c5acebd305a822
+        templateTypes: [],
       }
     },
     computed: {
@@ -123,15 +117,11 @@ export default {
       ])
     }, 
     methods: {
-<<<<<<< HEAD
       slideCard(data){
         if(data.type === 'fascia'){
           this.e1 = 2;
         }else if(data.type === 'category'){
-          this.isLoading = true;
-          let url;
-          url = data.name === 'Women' ? '/api/womentemplates/all' : '/api/mentemplates/all'
-          this.$axios.$get(url)
+          this.$axios.$get(`/api/${data.mapTemplates}/all`)
          .then(response => {
            const templateTypes = response.map(curr => {
              return {
@@ -139,7 +129,7 @@ export default {
                type: curr.template_type, 
                background: curr.background_color, 
                icon: curr.icon 
-               }
+              }
            });
            this.templateTypes = templateTypes;
             this.e1 = 3;
@@ -147,17 +137,11 @@ export default {
         }else {
           this.$router.push('/templatelist');
         }
-=======
-      cardClicked(data){
-       this.e1 = data.type === 'fascia' ?  2 : 3
-       this.$store.commit('setSelected', data);
-      }, 
-      nextStep(data) {
->>>>>>> 85ca9b1b47e565d72e36e0f4b3c5acebd305a822
         this.$store.commit('setSelected', data);
-      }
+        
     },
   }
+}
 </script>
 
 <style lang='scss' scoped>

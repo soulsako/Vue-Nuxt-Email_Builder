@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
   if(obj.id === 'all'){
     operation = WomenTemplates.find();
   }else {
-    operation = WomenTemplates.findOne({template_type: obj.id});
+    operation = WomenTemplates.findOne({_id: obj.id});
   }
   operation.exec().then(doc => {
     res.send(doc);

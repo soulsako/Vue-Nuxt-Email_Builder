@@ -5,17 +5,17 @@
 
         <v-flex xs12 md4>
           <v-text-field
-            v-model="plu"
+            v-model="plus"
             :autofocus="true"
             label="Enter PLU"
             required
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 md4>
+        <v-flex v-if="twoColumn" xs12 md4>
           <v-text-field
             v-model="url"
-            label="Enter Product URL"
+            label="Enter second PLU"
           ></v-text-field>
         </v-flex>
 
@@ -27,13 +27,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
   export default {
+    prop: {
+      twoColumn: {
+        required: false,
+        default: () => false, 
+        type: Boolean
+      }
+    },
     data(){
       return {
-        plus: ['53523'], 
+        plus: '', 
         url: '' 
       }
-    }, 
+    },
+    computed: {
+      ...mapGetters([
+        'getCurrentComponent'
+      ])
+    },
     methods: { 
       submitPlu(){
         this.$axios.$post('/api/submitplu', {
