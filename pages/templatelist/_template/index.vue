@@ -122,7 +122,7 @@ import jsonData from '@/componentsData.json';
         let arr;
             this.jsonData.forEach(dataComponent => {
             if(dataComponent.name === name){
-              arr = dataComponent;
+              arr = {...dataComponent};
             }
           })
         return arr;

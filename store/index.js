@@ -4,7 +4,10 @@ export const state = () => ({
   templates: [], 
   templateInfo: {
     // Persist this bit of information in local storage
-    fascia: '', 
+    fascia: {
+      id: '', 
+      name: ''
+    }, 
     category: '',
     type: {
       id: '',
@@ -25,7 +28,9 @@ export const getters = {
   getTemplates: state => state.templates,
   getTemplateInfo: state => state.templateInfo, 
   getComponentsData: state => state.componentsData,
-  getCurrentComponent: state => state.currentComponent
+  getCurrentComponent: state => state.currentComponent, 
+  getFascia: state => state.templateInfo.fascia
+
 }
 
 export const mutations = {
@@ -41,7 +46,9 @@ export const mutations = {
   setSelected: (state, data) => {
     const isState = state.templateInfo
     if(data.type === 'fascia'){
-      return isState.fascia = data.id;
+      isState.fascia.id = data.id;
+      isState.fascia.name = data.name;
+      return;
     }else if(data.type === 'category'){
       return isState.category = data.mapTemplates;
     }else {
@@ -75,8 +82,9 @@ export const mutations = {
   setBorder: (state, index) => {
     // Add border for selected component
     state.componentsData.forEach(curr => curr.isSelected = false);
-    state.componentsData[index].isSelected = true;
-    console.log(state.componentsData);
+    const newState = [...state.componentsData];
+    newState[index].isSelected = true;
+    state.componentsData = newState;
   }
 }
 // Set Master data to store state

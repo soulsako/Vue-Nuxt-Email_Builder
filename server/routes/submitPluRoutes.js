@@ -20,6 +20,7 @@ route.post('/', (req, res) => {
   }
 
   let plus = data.plus;
+  console.log(plus);
 
   const splitPlus = plus.split(',');
 
