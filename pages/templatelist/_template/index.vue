@@ -6,7 +6,11 @@
         v-for="(data, index) in getComponentsData" 
         :key="index" 
         class="components__div mb-3"
-        @click="onComponentSelect({name: data.name, index: index})"
+        @click="onComponentSelect({
+          name: data.name.toLowerCase(), 
+          index: index
+        })"
+        :class="{bordercolor: data.isSelected}"
         >
           <component 
           :is="components[compMethod(data.name)]" 
@@ -55,6 +59,7 @@
 </template>
 
 <script>
+//@click="onComponentSelect({name: data.name.toLowerCase(), index: index})"
 import { mapGetters } from 'vuex';
 import jsonData from '@/componentsData.json';
   export default { 
@@ -78,7 +83,10 @@ import jsonData from '@/componentsData.json';
         'getTemplates', 
         'getTemplateInfo', 
         'getComponentsData'
-      ])
+      ]), 
+      isSelected(){
+        return 
+      }
     },
     methods: {
       // Render same component for many different names in the database
@@ -90,8 +98,9 @@ import jsonData from '@/componentsData.json';
       }, 
       onComponentSelect(compData){
         this.showPluInput = true;
-        const twoString = compData.name.toLowerCase().substring(0, 3);
+        const twoString = compData.name.substring(0, 3);
         this.twoColumn = twoString === 'two' ? true : false
+        this.$store.commit('setBorder', compData.index);
         this.$store.commit('setCurrentComponent', compData);
       }
     },
@@ -134,7 +143,9 @@ import jsonData from '@/componentsData.json';
    align-items: center;
  }
  .components__div {
-   border: 3px solid $color-primary;
    cursor: pointer;
+ }
+ .bordercolor {
+   border: 3px solid #E53935;
  }
 </style>

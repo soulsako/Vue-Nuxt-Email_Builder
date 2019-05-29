@@ -68,8 +68,15 @@ export const mutations = {
   }, 
 
   setCurrentComponent: (state, compData) => {
+    //Add details of current component
     state.currentComponent.name = compData.name;
     state.currentComponent.index = compData.index;
+  }, 
+  setBorder: (state, index) => {
+    // Add border for selected component
+    state.componentsData.forEach(curr => curr.isSelected = false);
+    state.componentsData[index].isSelected = true;
+    console.log(state.componentsData);
   }
 }
 // Set Master data to store state
