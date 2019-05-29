@@ -36,7 +36,7 @@
             value="tab-1"
           >
             <v-card flat>
-              <ProductDetails v-if="showPluInput"/>
+              <ProductDetails v-if="showPluInput" :twoColumn="twoColumn"/>
             </v-card>
           </v-tab-item>
 
@@ -69,7 +69,8 @@ import jsonData from '@/componentsData.json';
         }, 
         componentsData: [],
         jsonData: jsonData, 
-        showPluInput: false
+        showPluInput: false, 
+        twoColumn: false
       }
     }, 
     computed: {
@@ -88,8 +89,10 @@ import jsonData from '@/componentsData.json';
         return name;
       }, 
       onComponentSelect(compData){
-        this.$store.commit('setCurrentComponent', compData);
         this.showPluInput = true;
+        const twoString = compData.name.toLowerCase().substring(0, 3);
+        this.twoColumn = twoString === 'two' ? true : false
+        this.$store.commit('setCurrentComponent', compData);
       }
     },
     mounted(){

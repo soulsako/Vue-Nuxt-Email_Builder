@@ -132,7 +132,7 @@ export default {
               }
            });
            this.templateTypes = templateTypes;
-            this.e1 = 3;
+           this.e1 = 3;
          });
         }else {
           this.$router.push('/templatelist');

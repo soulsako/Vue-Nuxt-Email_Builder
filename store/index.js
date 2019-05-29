@@ -9,13 +9,13 @@ export const state = () => ({
     type: {
       id: '',
       name: ''
-    }, 
-    currentComponent: {
-      name: '', 
-      index: null
     }
   }, 
-  componentsData: []
+  componentsData: [], 
+  currentComponent: {
+    name: '', 
+    index: null
+  },
 });
 
 export const getters = {

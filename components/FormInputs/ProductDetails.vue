@@ -29,7 +29,7 @@
 <script>
 import { mapGetters } from 'vuex'
   export default {
-    prop: {
+    props: {
       twoColumn: {
         required: false,
         default: () => false, 
