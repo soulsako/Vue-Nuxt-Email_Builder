@@ -5,7 +5,8 @@ export default ({store}) => {
       key: 'vuex', 
       reducer: state => ({
         templates: state.templates, 
-        templateInfo: state.templateInfo
+        templateInfo: state.templateInfo, 
+        componentsData: state.componentsData
       })
   })(store)
 }

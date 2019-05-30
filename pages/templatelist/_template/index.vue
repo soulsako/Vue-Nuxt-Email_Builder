@@ -1,65 +1,36 @@
 <template>
-  <v-container fluid>
-    <v-layout app white elevation-8>
-      <v-flex lg7 class="v-flex-6">
-        <div 
-        v-for="(data, index) in getComponentsData" 
-        :key="index" 
-        class="components__div mb-3"
-        @click="onComponentSelect({
-          name: data.name.toLowerCase(), 
-          index: index
-        })"
-        :class="{bordercolor: data.isSelected}"
-        >
-          <component 
-          :is="components[compMethod(data.name)]" 
-          v-bind="data"
-          />
-        </div>
-      </v-flex>
-      <v-flex lg5 pa-2 text-sm-center>
-        <v-tabs
-          centered
-          color="blue-grey darken-4"
-          dark
-          icons-and-text>
-          <v-tabs-slider color="success"></v-tabs-slider>
-
-          <v-tab href="#tab-1">
-            Details
-            <v-icon>details</v-icon>
-          </v-tab>
-
-          <v-tab href="#tab-2">
-            Styles
-            <v-icon>invert_colors</v-icon>
-          </v-tab>
-
-          <v-tab-item
-            value="tab-1"
+  <div>
+    <v-container fluid app>
+      <v-layout app white elevation-8>
+        <v-flex class="v-flex-6" pa-2>
+          <h6 class="heading-4 subheading pa-4 blue-grey darken-4 text-uppercase text-sm-center white--text">Click on a component to start editing</h6>
+          <div 
+          v-for="(data, index) in getComponentsData" 
+          :key="index" 
+          class="components__div mb-3"
+          @click="onComponentSelect(data)"
           >
-            <v-card flat>
-              <ProductDetails v-if="showPluInput" :twoColumn="twoColumn"/>
-            </v-card>
-          </v-tab-item>
-
-          <v-tab-item
-            value="tab-2"
-          >
-            <v-card flat>
-              <ProductStyles />
-            </v-card>
-          </v-tab-item>
-
-        </v-tabs>
-      </v-flex>
-    </v-layout>
-  </v-container>
+            <component 
+            :is="components[compMethod(data.name)]" 
+            v-bind="data"
+            />
+          </div>
+        </v-flex>
+        <v-flex lg5 pa-2 text-sm-center>
+          <ProductEditor>Global styles</ProductEditor>
+        </v-flex>
+      </v-layout>
+    </v-container>
+        <ProductModal
+        :dialog="dialog"
+        @close="dialog = false"
+        :name="componentName"
+        />
+  </div>
 </template>
 
 <script>
-//@click="onComponentSelect({name: data.name.toLowerCase(), index: index})"
+
 import { mapGetters } from 'vuex';
 import jsonData from '@/componentsData.json';
   export default { 
@@ -73,9 +44,9 @@ import jsonData from '@/componentsData.json';
           TwoColumn: 'TwoColumn'
         }, 
         componentsData: [],
-        jsonData: jsonData, 
-        showPluInput: false, 
-        twoColumn: false
+        jsonData: jsonData,
+        dialog: false, 
+        componentName: ''
       }
     }, 
     computed: {
@@ -83,10 +54,7 @@ import jsonData from '@/componentsData.json';
         'getTemplates', 
         'getTemplateInfo', 
         'getComponentsData'
-      ]), 
-      isSelected(){
-        return 
-      }
+      ])
     },
     methods: {
       // Render same component for many different names in the database
@@ -97,11 +65,9 @@ import jsonData from '@/componentsData.json';
         return name;
       }, 
       onComponentSelect(compData){
-        this.showPluInput = true;
-        //Check if the component name starts with "two", if yes, show two input fields
-        const twoString = compData.name.substring(0, 3);
-        this.twoColumn = twoString === 'two' ? true : false
-        this.$store.commit('setBorder', compData.index);
+        //Pass the name of the component clicked 
+        this.componentName = compData.name;
+        this.dialog = true;
         this.$store.commit('setCurrentComponent', compData);
       }
     },
@@ -146,7 +112,10 @@ import jsonData from '@/componentsData.json';
  .components__div {
    cursor: pointer;
  }
- .bordercolor {
-   border: 3px solid #E53935;
+ .heading-4 {
+   width: 100%;
+ }
+ .subheading {
+   font-family: 'HCo Gotham SSm', sans-serif !important;
  }
 </style>

@@ -15,7 +15,7 @@ export const state = () => ({
     }
   }, 
   componentsData: [], 
-  currentComponent: {
+  currComp: {
     name: '', 
     index: ''
   },
@@ -76,16 +76,10 @@ export const mutations = {
 
   setCurrentComponent: (state, compData) => {
     //Add details of current component
-    state.currentComponent.name = compData.name;
-    state.currentComponent.index = compData.index;
-  },
-
-  setBorder: (state, index) => {
-    // Add border for selected component
-    state.componentsData.forEach(curr => curr.isSelected = false);
-    const newState = [...state.componentsData];
-    newState[index].isSelected = true;
-    state.componentsData = newState;
+    const currComp = { ...state.currComp }
+    currComp.name = compData.name;
+    currComp.index = compData.index;
+    state.currComp = currComp;
   },
   
   setProductInfo: (state, info) => {

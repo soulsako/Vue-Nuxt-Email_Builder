@@ -10,6 +10,8 @@ import TwoColumn from '@/components/NewTemplateComponents/TwoColumn.vue'
 import TextAndCta from '@/components/NewTemplateComponents/TextAndCta.vue'
 import ProductDetails from '@/components/FormInputs/ProductDetails.vue'
 import ProductStyles from '@/components/FormInputs/ProductStyles.vue'
+import ProductEditor from '@/components/FormInputs/ProductEditor.vue'
+import ProductModal from '@/components/Modal/ProductModal.vue'
 import { Sketch } from 'vue-color';
 
 
@@ -22,6 +24,8 @@ Vue.component('TwoColumn', TwoColumn);
 Vue.component('TextAndCta', TextAndCta);
 Vue.component('ProductDetails', ProductDetails);
 Vue.component('ProductStyles', ProductStyles);
+Vue.component('ProductEditor', ProductEditor);
+Vue.component('ProductModal', ProductModal);
 Vue.component('sketch-picker', Sketch);
 
 
