@@ -17,7 +17,7 @@ export const state = () => ({
   componentsData: [], 
   currentComponent: {
     name: '', 
-    index: null
+    index: ''
   },
 });
 
@@ -78,14 +78,24 @@ export const mutations = {
     //Add details of current component
     state.currentComponent.name = compData.name;
     state.currentComponent.index = compData.index;
-  }, 
+  },
+
   setBorder: (state, index) => {
     // Add border for selected component
     state.componentsData.forEach(curr => curr.isSelected = false);
     const newState = [...state.componentsData];
     newState[index].isSelected = true;
     state.componentsData = newState;
+  },
+  
+  setProductInfo: (state, info) => {
+    
+  }, 
+
+  setProductImages: (state, imags) => {
+    
   }
+
 }
 // Set Master data to store state
 export const actions = {

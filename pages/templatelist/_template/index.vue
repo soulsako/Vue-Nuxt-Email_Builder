@@ -98,6 +98,7 @@ import jsonData from '@/componentsData.json';
       }, 
       onComponentSelect(compData){
         this.showPluInput = true;
+        //Check if the component name starts with "two", if yes, show two input fields
         const twoString = compData.name.substring(0, 3);
         this.twoColumn = twoString === 'two' ? true : false
         this.$store.commit('setBorder', compData.index);

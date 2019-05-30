@@ -27,15 +27,6 @@
       </v-layout>
     </v-container>
   </v-form>
-  <div @click="this.showError = false">
-    <v-alert 
-        :value="showError"
-        :type="errorType"
-        dismissible
-      >
-        {{ errorMessage }}
-      </v-alert>
-    </div>
 </div>
 </template>
 
@@ -53,45 +44,50 @@ import { mapGetters } from 'vuex'
       return {
         plus: [],
         url: '', 
-        showError: false, 
-        errorMessage: '', 
-        errorType: ''
+        productInfo: [], 
+        productImages: []
       }
     },
     computed: {
       ...mapGetters([
-        'getCurrentComponent',
         'getFascia'
       ]), 
       iso(){
-        // Getting fascia as "JD GB" etc..
+        // Getting fascia as "JD GB" etc..and converting it to just 'gb'
         return this.getFascia.name.split(' ')[1].toLowerCase();
+      }
+    },
+    watch: {
+      productInfo(){
+        this.$store.commit('setProductInfo', this.productInfo);
+      },
+      productImages(){
+        this.$store.commit('setProductImages', this.productImages);
       }
     },
     methods: { 
       submitPlu(){
-        if(this.plus.length === 0){
-          return this.alert('error', 'Plu is required!');
-        }
+        //Get product data. Price, description etc.
         this.$axios.$post('/api/submitplu', {
           plus: this.plus.join(),
           iso: this.iso,
           site: 'jdsports'
           })
         .then(response => {
-          console.log(response);
-          if(response.products.length === 0){
-            return this.alert('error', 'No products found. Plese check PLU and try again!');
-          }else {
-            return this.alert('success', 'Product found successfully');
-          }
+          //Returns an array of each product object
+          this.productInfo = response.products;
         })
-        this.plus = [];
-      }, 
-      alert(type, message){
-        this.showError = true;
-        this.errorType = type;
-        this.errorMessage = message;
+        //Get product images. Returns an array of images (shot1, shot2, etc)
+        const productImages = this.plus.map(plu => {
+          let images;
+          //Returns an array of images [[images], [images]]
+          this.$axios.$get(`https://i8.amplience.net/s/jpl/jd_${plu}_is.json`)
+          .then(response => {
+            images = response.items;
+          });
+          return images;
+        })
+        this.productImages = productImages;
       }
     }
   }
