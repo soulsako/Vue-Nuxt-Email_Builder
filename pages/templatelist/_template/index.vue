@@ -8,7 +8,7 @@
           v-for="(data, index) in getComponentsData" 
           :key="index" 
           class="components__div mb-3"
-          @click="onComponentSelect(data)"
+          @click="onComponentSelect({...data, index: index})"
           >
             <component 
             :is="components[compMethod(data.name)]" 
@@ -17,15 +17,20 @@
           </div>
         </v-flex>
         <v-flex lg5 pa-2 text-sm-center>
-          <ProductEditor>Global styles</ProductEditor>
+          <ProductEditor
+          :labelOne="{ first: 'Button', second: 'text', third: 'color' }"
+          :labelTwo="{ first: 'Button', second: 'background', third: 'color' }"
+          :labelThree="{ first: 'Price', second: 'color' }"
+          >
+          Global styles</ProductEditor>
         </v-flex>
       </v-layout>
     </v-container>
-        <ProductModal
-        :dialog="dialog"
-        @close="dialog = false"
-        :name="componentName"
-        />
+    <ProductModal
+    :dialog="dialog"
+    @close="dialog = false"
+    @save="onSaveHandler"
+    />
   </div>
 </template>
 
@@ -45,8 +50,7 @@ import jsonData from '@/componentsData.json';
         }, 
         componentsData: [],
         jsonData: jsonData,
-        dialog: false, 
-        componentName: ''
+        dialog: false
       }
     }, 
     computed: {
@@ -65,10 +69,12 @@ import jsonData from '@/componentsData.json';
         return name;
       }, 
       onComponentSelect(compData){
-        //Pass the name of the component clicked 
-        this.componentName = compData.name;
         this.dialog = true;
-        this.$store.commit('setCurrentComponent', compData);
+        this.$store.commit('setCurrComp', compData);
+      }, 
+      onSaveHandler(){
+        this.$store.commit('setNewCurrComp');
+        this.dialog = false;
       }
     },
     mounted(){

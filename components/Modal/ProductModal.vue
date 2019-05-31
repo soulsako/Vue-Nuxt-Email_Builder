@@ -10,7 +10,7 @@
           <v-toolbar-title>Editor</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn dark flat @click="$emit('close')">Save</v-btn>
+            <v-btn dark flat @click="$emit('save')">Save</v-btn>
           </v-toolbar-items>
         </v-toolbar>
 
@@ -18,8 +18,8 @@
           <v-layout app white elevation-8>
             <v-flex lg7 py-2 px-1>
               <component 
-              :is="components[compMethod(extractComponent[0].name)]" 
-              v-bind="extractComponent[0]"
+              :is="components[compMethod(getCurrComp.name)]" 
+              v-bind="getCurrComp"
               v-if="dialog"
               style="margin: 0 auto"/>
             </v-flex>
@@ -30,6 +30,12 @@
               <ProductEditor 
               :double="true"
               :twoColumn="twoColumn"
+              :labelOne="{ first: 'Description', second: 'text', third: 'color' }"
+              :labelTwo="{ first: 'Description', second: 'background', third: 'color' }"
+              :labelThree="{ first: 'Price', second: 'color' }"
+              :checkbox="getCurrComp.name === 'SingleApparel' ? true : false"
+              checkLabelTwo="Invert component"
+              checkLabel="Split description box"
               >
               Styles
               </ProductEditor>
@@ -51,10 +57,6 @@ import { mapGetters } from 'vuex'
         required: false, 
         default: () => false, 
         type: Boolean
-      },
-      name: {
-        required: false, 
-        type: String
       }
     }, 
     data(){
@@ -71,13 +73,8 @@ import { mapGetters } from 'vuex'
     }, 
     computed: {
       ...mapGetters([
-        'getComponentsData'
-      ]), 
-      extractComponent(){
-          return this.getComponentsData.filter(component => {
-          return component.name === this.name
-        })
-      }
+        'getCurrComp'
+      ])
     },
     methods: {
       compMethod(name){
@@ -88,7 +85,8 @@ import { mapGetters } from 'vuex'
       }
     },
     updated(){
-      const twoString = this.name.substring(0, 3).toLowerCase();
+      //If the component selected has name starting with "two", show the second input
+      const twoString = this.getCurrComp.name.substring(0, 3).toLowerCase();
       this.twoColumn = twoString === 'two' ? true : false
     }
   }

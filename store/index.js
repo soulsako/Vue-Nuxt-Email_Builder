@@ -15,10 +15,7 @@ export const state = () => ({
     }
   }, 
   componentsData: [], 
-  currComp: {
-    name: '', 
-    index: ''
-  },
+  currComp: {},
 });
 
 export const getters = {
@@ -28,7 +25,7 @@ export const getters = {
   getTemplates: state => state.templates,
   getTemplateInfo: state => state.templateInfo, 
   getComponentsData: state => state.componentsData,
-  getCurrentComponent: state => state.currentComponent, 
+  getCurrComp: state => state.currComp, 
   getFascia: state => state.templateInfo.fascia
 
 }
@@ -58,38 +55,59 @@ export const mutations = {
     }
   }, 
 
-  setButtonStyles: (state, styles) => {
-    if(styles.allButtons === 'all' && styles.styleProp === 'text'){
-      state.componentsData.forEach(curr => {
-        curr.button ? curr.btnColor = styles.color : null
-      })
-    }else if(styles.allButtons === 'all' && styles.styleProp === 'background'){
-      state.componentsData.forEach(curr => {
-        curr.button ? curr.btnBackground = styles.color : null
-      })
-    }else if(styles.styleProp === 'price'){
-      state.componentsData.forEach(curr => {
-        curr.hasPrice ? curr.priceColor = styles.color : null
-      })
+  setStyles: (state, styles) => {
+
+    if(styles.singleApparel){
+      const newCurrComp = { ...state.currComp }
+      if(styles.styleProp === 'text'){
+        newCurrComp.color = styles.color;
+      }else if(styles.styleProp === 'background'){
+        newCurrComp.backgroundColor = styles.color;
+      }else if(styles.styleProp === 'price'){
+        newCurrComp.priceColor = styles.color;
+      }
+      state.currComp = newCurrComp;
+    }else {
+      if(styles.styleProp === 'text'){
+        state.componentsData.forEach(curr => {
+          curr.button ? curr.btnColor = styles.color : null
+        })
+      }else if(styles.styleProp === 'background'){
+        state.componentsData.forEach(curr => {
+          curr.button ? curr.btnBackground = styles.color : null
+        })
+      }else if(styles.styleProp === 'price'){
+        state.componentsData.forEach(curr => {
+          curr.hasPrice ? curr.priceColor = styles.color : null
+        })
+      }
     }
   }, 
-
-  setCurrentComponent: (state, compData) => {
-    //Add details of current component
-    const currComp = { ...state.currComp }
-    currComp.name = compData.name;
-    currComp.index = compData.index;
-    state.currComp = currComp;
-  },
-  
+  //Add details of current component
+  setCurrComp: (state, compData) => state.currComp = compData,
+  setNewCurrComp: state => {
+    const index = state.currComp.index;
+    const newCompData = [...state.componentsData]
+    newCompData[index] = {...state.currComp}
+    state.componentsData = newCompData
+  },  
   setProductInfo: (state, info) => {
-    
+
   }, 
 
   setProductImages: (state, imags) => {
     
+  },
+  setInvert: (state, isInvert) => {
+    const newCurrComp = { ...state.currComp }
+    isInvert !== null ? newCurrComp.invert = true : newCurrComp.invert = false
+    state.currComp = newCurrComp 
+  }, 
+  setSplit: (state, isSplit) => {
+    const newCurrComp = { ...state.currComp }
+    isSplit !== null ? newCurrComp.multipleSplit = true : newCurrComp.multipleSplit = false
+    state.currComp = newCurrComp 
   }
-
 }
 // Set Master data to store state
 export const actions = {

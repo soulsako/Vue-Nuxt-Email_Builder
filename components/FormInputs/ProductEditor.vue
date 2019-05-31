@@ -28,25 +28,33 @@
       value="tab-2"
     >
       <v-card flat>
-        <ProductStyles />
+        <ProductStyles
+        :labelOne="labelOne"
+        :labelTwo="labelTwo"
+        :labelThree="labelThree"
+        :checkbox="checkbox"
+        :checkLabel="checkLabel"
+        :checkLabelTwo="checkLabelTwo"/> 
       </v-card>
     </v-tab-item>
   </v-tabs>
 </template>
 
 <script>
+const stringRequired = { required: true, type: String }
+const objectRequired = { required: true, type: Object }
+const falseBoolean = {required: false, default: () => false, type: Boolean}
+const stringNotRequired = { type: String, required: false }
   export default {
     props: {
-      double: {
-        required: false, 
-        default: () => false, 
-        type: Boolean
-      }, 
-      twoColumn: {
-        required: false, 
-        default: () => false, 
-        type: Boolean
-      }
+      double: falseBoolean, 
+      twoColumn: falseBoolean, 
+      labelOne: objectRequired, 
+      labelTwo: objectRequired,
+      labelThree: objectRequired,
+      checkLabel: stringNotRequired,
+      checkLabelTwo: stringNotRequired,
+      checkbox: falseBoolean
     }
   }
 </script>

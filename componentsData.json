@@ -128,7 +128,7 @@
   {
     "name": "SingleApparel",
     "multiple": false,
-    "multipleSplit": true, 
+    "multipleSplit": false, 
     "sale": false, 
     "women": false,
     "invert": false,
@@ -136,7 +136,7 @@
     "src": "https://i8.amplience.net/i/jpl/men-rightplu-e87a66499d2a4a7e462d289b7a734d68", 
     "brand": "Brand",
     "url": "http://jdsports.com/men",
-    "descriptionOne": "Some Product Description Some Product Description", 
+    "descriptionOne": "Some Product Description", 
     "descriptionTwo": "Some second Description",
     "oldPrice": "49.99", 
     "oldPriceTwo": "29.99",
