@@ -34,7 +34,7 @@
         :labelThree="labelThree"
         :checkbox="checkbox"
         :checkLabel="checkLabel"
-        :checkLabelTwo="checkLabelTwo"/> 
+        :checkLabelTwo="checkLabelTwo"/>
       </v-card>
     </v-tab-item>
   </v-tabs>

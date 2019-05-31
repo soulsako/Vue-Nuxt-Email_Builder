@@ -8,9 +8,9 @@ import SingleApparel from '@/components/NewTemplateComponents/SingleApparel.vue'
 import SingleFootwear from '@/components/NewTemplateComponents/SingleFootwear.vue'
 import TwoColumn from '@/components/NewTemplateComponents/TwoColumn.vue'
 import TextAndCta from '@/components/NewTemplateComponents/TextAndCta.vue'
-import ProductDetails from '@/components/FormInputs/ProductDetails.vue'
-import ProductStyles from '@/components/FormInputs/ProductStyles.vue'
-import ProductEditor from '@/components/FormInputs/ProductEditor.vue'
+import ProductDetails from '@/components/FormInputs/ProductEditor/ProductDetails.vue'
+import ProductStyles from '@/components/FormInputs/ProductEditor/ProductStyles.vue'
+import ProductEditor from '@/components/FormInputs/ProductEditor/ProductEditor.vue'
 import ProductModal from '@/components/Modal/ProductModal.vue'
 import { Sketch } from 'vue-color';
 

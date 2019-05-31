@@ -16,6 +16,7 @@ export const state = () => ({
   }, 
   componentsData: [], 
   currComp: {},
+  currCompImages: []
 });
 
 export const getters = {
@@ -26,7 +27,8 @@ export const getters = {
   getTemplateInfo: state => state.templateInfo, 
   getComponentsData: state => state.componentsData,
   getCurrComp: state => state.currComp, 
-  getFascia: state => state.templateInfo.fascia
+  getFascia: state => state.templateInfo.fascia,
+  getCurrCompImages: state => state.currCompImages
 
 }
 
@@ -68,45 +70,64 @@ export const mutations = {
       }
       state.currComp = newCurrComp;
     }else {
+      const newCompData = [ ...state.componentsData ];
       if(styles.styleProp === 'text'){
-        state.componentsData.forEach(curr => {
+        newCompData.forEach(curr => {
           curr.button ? curr.btnColor = styles.color : null
         })
       }else if(styles.styleProp === 'background'){
-        state.componentsData.forEach(curr => {
+        newCompData.forEach(curr => {
           curr.button ? curr.btnBackground = styles.color : null
         })
       }else if(styles.styleProp === 'price'){
-        state.componentsData.forEach(curr => {
+        newCompData.forEach(curr => {
           curr.hasPrice ? curr.priceColor = styles.color : null
         })
       }
+      state.componentsData = newCompData;
     }
   }, 
   //Add details of current component
   setCurrComp: (state, compData) => state.currComp = compData,
-  setNewCurrComp: state => {
-    const index = state.currComp.index;
-    const newCompData = [...state.componentsData]
-    newCompData[index] = {...state.currComp}
-    state.componentsData = newCompData
-  },  
-  setProductInfo: (state, info) => {
 
+  setNewCurrComp: state => {
+
+    const index = state.currComp.index;
+    const newCompData = [ ...state.componentsData ]
+    newCompData[index] = { ...state.currComp }
+    state.componentsData = newCompData
   }, 
 
-  setProductImages: (state, imags) => {
-    
+  setProductOne: (state, proOne) => {
+
+    const productInfo = proOne[0]; // {brand: '', category, plu, exclusive: '', price, title, url}
+    const productImages = proOne[1];//  [{format, height, opaque, src, type, width}, {}]
+
+    const newCurrComp = { ...state.currComp };
+    const returnedNewCurrComp = Object.assign(newCurrComp, productInfo);
+    state.currComp = returnedNewCurrComp;
+    state.currCompImages = productImages;
   },
+
+  setProductTwo: (state, proTwo) => {
+    console.log(proTwo);
+  },
+
   setInvert: (state, isInvert) => {
     const newCurrComp = { ...state.currComp }
     isInvert !== null ? newCurrComp.invert = true : newCurrComp.invert = false
     state.currComp = newCurrComp 
-  }, 
+  },
+
   setSplit: (state, isSplit) => {
     const newCurrComp = { ...state.currComp }
     isSplit !== null ? newCurrComp.multipleSplit = true : newCurrComp.multipleSplit = false
     state.currComp = newCurrComp 
+  }, 
+  setNewImage: (state, src) => {
+    const newCurrComp = { ...state.currComp };
+    newCurrComp.src = src;
+    state.currComp = newCurrComp;
   }
 }
 // Set Master data to store state

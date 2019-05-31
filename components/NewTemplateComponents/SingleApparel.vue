@@ -13,7 +13,7 @@
         <!-- Only show old price if sale prop is true -->
         <div class="singleapparel__info--price">
         <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ oldPrice }}</span>
-        <span class="singleapparel__info-price">{{ currency.gb}}{{ price }}</span>
+        <span :style="{color: compPriceColor}" class="singleapparel__info-price">{{ currency.gb}}{{ price }}</span>
         <div v-if="multiple">
           <div class="singleapparel__info-description">{{ descriptionTwo }}</div>
           <!-- Only show old price if sale prop is true -->
@@ -30,7 +30,7 @@
         <!-- Only show old price if sale prop is true -->
         <div class="singleapparel__info--price">
         <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ oldPriceTwo }}</span>
-        <span class="singleapparel__info-price">{{ currency.gb}}{{ priceTwo }}</span>
+        <span :style="{color: compPriceColor}" class="singleapparel__info-price">{{ currency.gb}}{{ priceTwo }}</span>
         </div>
       </div>
   </div>
@@ -64,6 +64,7 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
       exclusive: falseBoolean,  
       invert: falseBoolean,
       price: stringTrue,
+      priceColor: stringNotRequired,
       oldPrice: stringNotRequired, 
       priceTwo: stringNotRequired, 
       oldPriceTwo: stringNotRequired, 
@@ -84,7 +85,14 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
         }else {
           return '#111'
         }
-      }, 
+      },
+      compPriceColor(){
+        if(this.priceColor){
+          return this.priceColor;
+        }else {
+          return '#fff'
+        }
+      },
       infoTextColor(){
         return this.color ? this.color : '#fff';
       }, 
@@ -172,6 +180,8 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
     position: relative;
     width: 56rem;
     height: 53rem;
+    background-position: center;
+    background-size: cover;
 
     &__exclusive {
      @include exclusiveBig;

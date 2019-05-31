@@ -89,8 +89,6 @@ import { mapGetters } from 'vuex'
           styleProp: this.styleProp, 
           allButtons: this.all
         }
-        console.log(inputData);
-
         this.$store.commit('setStyles', inputData);
       }, 
       onInvertHandler(){
@@ -102,7 +100,6 @@ import { mapGetters } from 'vuex'
     }, 
     updated(){
       this.compName = this.getCurrComp.name;
-      console.log(this.compName);
     }
   }
 </script>

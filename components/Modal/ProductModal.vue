@@ -16,12 +16,43 @@
 
         <v-container app>
           <v-layout app white elevation-8>
-            <v-flex lg7 py-2 px-1>
+            <v-flex lg7 py-2 px-1 >
               <component 
               :is="components[compMethod(getCurrComp.name)]" 
               v-bind="getCurrComp"
               v-if="dialog"
               style="margin: 0 auto"/>
+
+              <v-divider />
+
+               <v-layout pa-3>
+                <v-flex xs12 sm12>
+                  <v-card flat>
+                    <v-container grid-list-md fluid>
+                      <v-layout row wrap>
+                        <v-flex
+                          v-for="(image, index) in getCurrCompImages"
+                          :key="index"
+                          xs4
+                          d-flex
+                          @click="onImageChange(image.src)"
+                        >
+                          <v-card flat tile class="d-flex">
+                            <v-img
+                              :src="image.src"
+                              :lazy-src="image.src"
+                              aspect-ratio="1"
+                              class="grey lighten-2"
+                            >
+                            </v-img>
+                          </v-card>
+                        </v-flex>
+                      </v-layout>
+                    </v-container>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+
             </v-flex>
 
             <v-divider vertical />
@@ -68,12 +99,14 @@ import { mapGetters } from 'vuex'
           TextAndCta: 'TextAndCta',
           TwoColumn: 'TwoColumn'
         }, 
-        twoColumn: false
+        twoColumn: false, 
+        images: []
       }
     }, 
     computed: {
       ...mapGetters([
-        'getCurrComp'
+        'getCurrComp',
+        'getCurrCompImages' 
       ])
     },
     methods: {
@@ -82,12 +115,16 @@ import { mapGetters } from 'vuex'
           return 'TwoColumn'
         }
         return name;
+      }, 
+      onImageChange(src){
+        this.$store.commit('setNewImage', src);
       }
     },
     updated(){
       //If the component selected has name starting with "two", show the second input
       const twoString = this.getCurrComp.name.substring(0, 3).toLowerCase();
       this.twoColumn = twoString === 'two' ? true : false
+
     }
   }
 </script>

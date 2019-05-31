@@ -27,10 +27,10 @@
       </v-layout>
     </v-container>
     <ProductModal
-    :dialog="dialog"
-    @close="dialog = false"
-    @save="onSaveHandler"
-    />
+      :dialog="dialog"
+      @close="dialog = false"
+      @save="onSaveHandler"
+      />
   </div>
 </template>
 

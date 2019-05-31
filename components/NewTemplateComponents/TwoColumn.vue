@@ -10,7 +10,7 @@
       :button="button"
       :buttonText="buttonText"
       :brand="brand" 
-      :description="description"
+      :description="title"
       :price="price"
       :oldPrice="oldPrice"
       :descriptionTwo="descriptionThree"
@@ -29,7 +29,7 @@
       :button="button"
       :buttonText="buttonTextTwo"
       :brand="brandTwo" 
-      :description="descriptionTwo"
+      :description="titleTwo"
       :price="priceTwo"
       :oldPrice="oldPriceTwo"
       :descriptionTwo="descriptionFour"
@@ -55,12 +55,15 @@ const stringNotRequired = {required: false, type: String}
       buttonText: stringNotRequired,
       buttonTextTwo: stringNotRequired, 
       brand: stringRequired,
-      description: stringRequired, 
-      price: stringRequired,
+      title: stringRequired, 
+      price: {
+        required: true, 
+        type: Number
+      },
       oldPrice: stringNotRequired,  
       src: stringRequired, 
       brandTwo: stringRequired, 
-      descriptionTwo: stringRequired, 
+      titleTwo: stringRequired, 
       priceTwo: stringRequired, 
       oldPriceTwo: stringRequired, 
       srcTwo: stringRequired, 
