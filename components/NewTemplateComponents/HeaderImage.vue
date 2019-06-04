@@ -3,6 +3,7 @@
     <BaseButton
     :color="compColor"
     :background="compBackground"
+    :sale="sale"
     class="app__button"
     >shop now</BaseButton>
   </div>
@@ -49,6 +50,8 @@ const stringNotRequired = { required: false, type: String }
     width: 60rem;
     height: 60rem;
     position: relative;
+    background-size: cover;
+    background-position: center;
   }
   .app__button {
     position: absolute;
@@ -57,3 +60,4 @@ const stringNotRequired = { required: false, type: String }
     transform: translate(-50%, -50%);
   }
 </style>
+

@@ -2,78 +2,55 @@
   <div class="twocolumn">
     <div class="mr-3 twocolumn__left">
       <BaseColumn
-      :height="height"
-      :sale="sale"
-      :women="women"
-      :exclusive="exclusive"
       :full="full"
+      :sale="sale"
+      :height="height"
+      :hasPrice="hasPrice"
       :button="button"
-      :buttonText="buttonText"
-      :brand="brand" 
-      :description="title"
-      :price="price"
-      :oldPrice="oldPrice"
-      :descriptionTwo="descriptionThree"
-      :priceTwo="priceThree"
-      :oldPriceTwo="oldPriceThree" 
-      :priceColor="priceColor"
-      :src="src"/>
+      :btnColor="btnColor"
+      :btnBackground="btnBackground"
+      :plu="pluOne"
+      
+      />
     </div>
     
-   <BaseColumn
-      :height="height"
-      :sale="sale"
-      :women="women"
-      :exclusive="exclusive"
+    <BaseColumn
       :full="full"
+      :sale="sale"
+      :height="height"
+      :hasPrice="hasPrice"
+      :btnColor="btnColor"
+      :btnBackground="btnBackground"
       :button="button"
-      :buttonText="buttonTextTwo"
-      :brand="brandTwo" 
-      :description="titleTwo"
-      :price="priceTwo"
-      :oldPrice="oldPriceTwo"
-      :descriptionTwo="descriptionFour"
-      :priceTwo="priceFour"
-      :oldPriceTwo="oldPriceFour"
-      :priceColor="priceColor"
-      :src="srcTwo"/>
+      :plu="pluTwo"
+      />
   </div>
 </template>
 
 <script>
-const stringRequired = {required: true, type: String}
-const booleanNotRequired = {required: false, type: Boolean, default: () => false}
-const stringNotRequired = {required: false, type: String}
+
+const stringRequired = {required: true, type: String},
+booleanNotRequired = {required: false, type: Boolean, default: () => false},
+stringNotRequired = {required: false, type: String},
+objectRequired = { type: Object, required: true };
+
   export default {
+    name: 'TwoColumn',
     props: {
-      height: stringRequired, 
+      full: booleanNotRequired,
       sale: booleanNotRequired, 
-      exclusive: booleanNotRequired,
-      women: booleanNotRequired,
-      full: booleanNotRequired, 
-      button: booleanNotRequired, 
-      buttonText: stringNotRequired,
-      buttonTextTwo: stringNotRequired, 
-      brand: stringRequired,
-      title: stringRequired, 
-      price: {
-        required: true, 
-        type: Number
-      },
-      oldPrice: stringNotRequired,  
-      src: stringRequired, 
-      brandTwo: stringRequired, 
-      titleTwo: stringRequired, 
-      priceTwo: stringRequired, 
-      oldPriceTwo: stringRequired, 
-      srcTwo: stringRequired, 
-      descriptionThree: stringNotRequired, 
-      descriptionFour: stringNotRequired, 
-      priceThree: stringNotRequired, 
-      priceFour: stringNotRequired, 
-      oldPriceThree: stringNotRequired, 
-      oldPriceFour: stringNotRequired,
-      priceColor: stringNotRequired
+      height: stringRequired,
+      hasPrice: booleanNotRequired,
+      priceColor: stringNotRequired,
+      button: booleanNotRequired,
+      btnColor: stringNotRequired, 
+      btnBackground: stringNotRequired, 
+      pluOne: objectRequired, 
+      pluTwo: objectRequired, 
+      twoColumn: {
+        type: Boolean, 
+        required: true
+      }
     }
   }
 </script>

@@ -9,16 +9,16 @@
      <!--dynamically change background-color with infoColor computed property-->
       <div id="box1" class="singleapparel__info-one draggable" :style="{backgroundColor: infoBackColor, color: infoTextColor, bottom: bottom, ...rightOrLeft}">
         <div class="singleapparel__info-brand">{{ brand }}</div>
-        <div class="singleapparel__info-description">{{ descriptionOne }}</div>
+        <div class="singleapparel__info-description">{{ title }}</div>
         <!-- Only show old price if sale prop is true -->
         <div class="singleapparel__info--price">
-        <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ oldPrice }}</span>
+        <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ was }}</span>
         <span :style="{color: compPriceColor}" class="singleapparel__info-price">{{ currency.gb}}{{ price }}</span>
         <div v-if="multiple">
-          <div class="singleapparel__info-description">{{ descriptionTwo }}</div>
+          <div class="singleapparel__info-description">{{ titleTwo }}</div>
           <!-- Only show old price if sale prop is true -->
           <div class="singleapparel__info--price">
-          <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ oldPriceTwo }}</span>
+          <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ wasTwo }}</span>
           <span class="singleapparel__info-price">{{ currency.gb}}{{ priceTwo }}</span>
           </div>
         </div>
@@ -26,10 +26,10 @@
       </div>
         <!-- Only show second info box if multipleSplit prop is true -->
       <div id="box2" v-if="multipleSplit" class="singleapparel__info-two draggable" :style="{backgroundColor: infoBackColor, color: infoTextColor, ...rightOrLeft}">
-        <div class="singleapparel__info-description">{{ descriptionTwo }}</div>
+        <div class="singleapparel__info-description">{{ titleTwo }}</div>
         <!-- Only show old price if sale prop is true -->
         <div class="singleapparel__info--price">
-        <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ oldPriceTwo }}</span>
+        <span v-if="sale" class="singleapparel__info-oldprice">{{ currency.gb}}{{ wasTwo }}</span>
         <span :style="{color: compPriceColor}" class="singleapparel__info-price">{{ currency.gb}}{{ priceTwo }}</span>
         </div>
       </div>
@@ -41,11 +41,14 @@
 import ExclusiveImage from '@/exclusive'
 import Currency from '@/currency'
 import interact from 'interactjs'
-const stringNotRequired = {type: String, required: false}
-const stringTrue = {type: String, required: true}
-const falseBoolean = {required: false, default: () => false, type: Boolean}
+
+const stringNotRequired = {type: String, required: false},
+stringTrue = {type: String, required: true},
+falseBoolean = {required: false, default: () => false, type: Boolean},
+requiredNumber = {required: true, type: Number};
 
   export default {
+    name: 'SingleApparel',
     data() {
       return {
         currency: Currency
@@ -58,16 +61,16 @@ const falseBoolean = {required: false, default: () => false, type: Boolean}
       brand:stringTrue,
       multiple: falseBoolean,
       multipleSplit: falseBoolean,
-      descriptionOne: stringTrue,
-      descriptionTwo: stringTrue,
+      title: stringTrue,
+      titleTwo: stringTrue,
       url: stringTrue, 
       exclusive: falseBoolean,  
       invert: falseBoolean,
-      price: stringTrue,
+      price: requiredNumber,
       priceColor: stringNotRequired,
-      oldPrice: stringNotRequired, 
-      priceTwo: stringNotRequired, 
-      oldPriceTwo: stringNotRequired, 
+      was: requiredNumber, 
+      priceTwo: requiredNumber, 
+      wasTwo: requiredNumber, 
       color: stringNotRequired, 
       backgroundColor: stringNotRequired
     }, 

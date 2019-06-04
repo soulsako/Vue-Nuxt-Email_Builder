@@ -16,7 +16,8 @@ export const state = () => ({
   }, 
   componentsData: [], 
   currComp: {},
-  currCompImages: []
+  imagesOne: [], 
+  imagesTwo: []
 });
 
 export const getters = {
@@ -28,7 +29,8 @@ export const getters = {
   getComponentsData: state => state.componentsData,
   getCurrComp: state => state.currComp, 
   getFascia: state => state.templateInfo.fascia,
-  getCurrCompImages: state => state.currCompImages
+  getImagesOne: state => state.imagesOne,
+  getImagesTwo: state => state.imagesTwo
 
 }
 
@@ -96,22 +98,9 @@ export const mutations = {
     const newCompData = [ ...state.componentsData ]
     newCompData[index] = { ...state.currComp }
     state.componentsData = newCompData
+    state.imagesOne = [];
+    state.imagesTwo = [];
   }, 
-
-  setProductOne: (state, proOne) => {
-
-    const productInfo = proOne[0]; // {brand: '', category, plu, exclusive: '', price, title, url}
-    const productImages = proOne[1];//  [{format, height, opaque, src, type, width}, {}]
-
-    const newCurrComp = { ...state.currComp };
-    const returnedNewCurrComp = Object.assign(newCurrComp, productInfo);
-    state.currComp = returnedNewCurrComp;
-    state.currCompImages = productImages;
-  },
-
-  setProductTwo: (state, proTwo) => {
-    console.log(proTwo);
-  },
 
   setInvert: (state, isInvert) => {
     const newCurrComp = { ...state.currComp }
@@ -123,12 +112,60 @@ export const mutations = {
     const newCurrComp = { ...state.currComp }
     isSplit !== null ? newCurrComp.multipleSplit = true : newCurrComp.multipleSplit = false
     state.currComp = newCurrComp 
-  }, 
-  setNewImage: (state, src) => {
-    const newCurrComp = { ...state.currComp };
-    newCurrComp.src = src;
+  },
+
+  setNewImage: (state, data) => {
+    const newCurrComp = {...state.currComp }
+    if(state.currComp.twoColumn){
+      // Two Column
+      data.type === 'one' ? newCurrComp['pluOne'].src = data.src : newCurrComp['pluTwo'].src = data.src;
+    }else {
+      // Single Column
+      newCurrComp.src = data.src;
+    }
     state.currComp = newCurrComp;
+  },
+
+  setClearImages: (state) => {
+    state.imagesOne = [];
+    state.imagesTwo = [];
+  },
+
+  setProductOne: (state, proOne) => {
+    return productMixin(state, proOne, {...state.currComp.pluOne}, 'pluOne');
+
+  },
+
+  setProductTwo: (state, proTwo, ) => {
+    return productMixin(state, proTwo, {...state.currComp.pluTwo}, 'pluTwo');
   }
+}
+
+const productMixin = (state, product, plu, str) => {
+  const productInfo = product[0],// {brand: '', category, plu, exclusive: '', price, title, url}
+  productImages = product[1], 
+  newCurrComp = {...state.currComp};
+  
+  if(newCurrComp.twoColumn){
+    
+    const img = productImages[0].src;
+    //The component is two column
+    const newPlu = Object.assign(plu, productInfo);
+    newPlu.src = img;
+    newCurrComp[str] = newPlu;
+    state.currComp = newCurrComp;
+    str === 'pluOne' ? state.imagesOne = productImages : state.imagesTwo = productImages
+    
+  }else {
+    //The component is single Column
+    const heroImg = productImages[0].src;
+    const newObject = Object.assign(newCurrComp, productInfo);
+    newObject.src = heroImg;
+    state.currComp = newObject;
+    state.imagesOne = productImages;
+
+  }
+  return;
 }
 // Set Master data to store state
 export const actions = {
@@ -146,5 +183,9 @@ export const actions = {
     })
   }
 }
+
+//Utility functions 
+
+
 
 

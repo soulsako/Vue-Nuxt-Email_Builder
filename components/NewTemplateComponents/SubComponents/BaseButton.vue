@@ -1,6 +1,6 @@
 <template>
   <div
-  :style="{backgroundColor: background, color: color, border: '1px solid ' + color}"
+  :style="{backgroundColor: btnBackground, color: btnColor, border: '1px solid ' + btnColor}"
   class="button">
   <slot/>
   </div>
@@ -16,6 +16,29 @@
       background: {
         required: false,
         type: String
+      }, 
+      sale: {
+        required: false, 
+        type: Boolean
+      }
+    }, 
+    computed: {
+      btnColor(){
+        return this.colorMixin(this.color, '#111')
+      }, 
+      btnBackground(){
+       return this.colorMixin(this.background, '#fff')
+      }
+    }, 
+    methods: {
+      colorMixin(prop, fallBack){
+        if(prop){
+          return prop
+        }else if(this.sale){
+          return '#e72933'
+        }else {
+          return fallBack
+        }
       }
     }
   }

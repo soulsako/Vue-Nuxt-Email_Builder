@@ -28,7 +28,7 @@
     </v-container>
     <ProductModal
       :dialog="dialog"
-      @close="dialog = false"
+      @close="onCloseHandler"
       @save="onSaveHandler"
       />
   </div>
@@ -74,6 +74,10 @@ import jsonData from '@/componentsData.json';
       }, 
       onSaveHandler(){
         this.$store.commit('setNewCurrComp');
+        this.dialog = false;
+      }, 
+      onCloseHandler(){
+        this.$store.commit('setClearImages');
         this.dialog = false;
       }
     },

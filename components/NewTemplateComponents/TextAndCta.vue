@@ -1,9 +1,9 @@
 <template>
   <div class="textandcta">
     <img :src="logo" v-if="logo" alt="some logo" class="textandcta__img">
-    <h1 :style="{color: saleColor}" class="textandcta__heading">{{ text }}</h1>
+    <h1 :style="{color: textColor}" class="textandcta__heading">{{ text }}</h1>
     <BaseButton
-    :color="saleColor"
+    :color="compBtnColor"
     :background="btnBackground"
     v-if="button">Shop now</BaseButton>
   </div>
@@ -13,11 +13,9 @@
 const stringNotRequired = { required: false, type: String }
 const booleanNotrequired = { required: false, type: Boolean }
   export default {
+    name: 'TextAndCta',
     props: {
-      text: {
-        required: true, 
-        type: String
-      }, 
+      text: { required: true, type: String }, 
       button: booleanNotrequired, 
       logo: stringNotRequired, 
       sale: booleanNotrequired, 
@@ -25,8 +23,11 @@ const booleanNotrequired = { required: false, type: Boolean }
       btnBackground: stringNotRequired
     },
     computed: {
-      saleColor(){
-      return this.sale ? '#e72933' : this.btnColor
+      compBtnColor(){
+        return this.sale ? '#e72933' : this.btnColor
+      }, 
+      textColor(){
+        return this.sale ? '#e72933' : '#111'
       }
     } 
   }

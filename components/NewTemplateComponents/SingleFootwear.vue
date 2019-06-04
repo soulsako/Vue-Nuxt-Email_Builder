@@ -11,10 +11,10 @@
     <div class="singlefootwear__bottom">
       <div class="singlefootwear__info">
       <div class="singlefootwear__info-brand">{{ brand }}</div>
-      <div class="singlefootwear__info-description">{{ description }}</div>
+      <div class="singlefootwear__info-description">{{ title }}</div>
       <!-- Only show old price if sale prop is true -->
       <div class="singlefootwear__info--price">
-      <span v-if="sale" class="singlefootwear__info-oldprice">{{ currency.gb}}{{ oldPrice }}</span>
+      <span v-if="sale" class="singlefootwear__info-oldprice">{{ currency.gb}}{{ was }}</span>
       <span :style="{color: compPriceColor}" class="singlefootwear__info-price">{{ currency.gb}}{{ price }}</span>
       </div>
     </div>
@@ -29,10 +29,14 @@
 <script>
 import ExclusiveImage from '@/exclusive'
 import Currency from '@/currency'
-const stringRequired = { required: true, type: String }
-const booleanNotRequired = { required: false, default: () => false, type: Boolean }
-const stringNotRequired = {required: false, type: String}
+
+const stringRequired = { required: true, type: String },
+booleanNotRequired = { required: false, default: () => false, type: Boolean },
+stringNotRequired = {required: false, type: String},
+numberRequired = {type: Number, required: true};
+
   export default {
+    name: 'SingleFootwear',
     data() {
       return {
         currency: Currency
@@ -43,12 +47,12 @@ const stringNotRequired = {required: false, type: String}
       women: booleanNotRequired, 
       src: stringRequired, 
       brand: stringRequired,
-      description: stringRequired,
+      title: stringRequired,
       url: stringRequired, 
       exclusive: booleanNotRequired, 
-      price: stringRequired,
+      price: numberRequired,
       priceColor: stringNotRequired, 
-      oldPrice: stringNotRequired, 
+      was: numberRequired, 
       button: booleanNotRequired, 
       btnColor: stringNotRequired, 
       btnBackground: stringNotRequired
@@ -75,6 +79,8 @@ const stringNotRequired = {required: false, type: String}
       position: relative;
       height: 40rem;
       width: 56rem;
+      background-size: cover;
+      background-position: center;
     }
 
     &__exclusive {

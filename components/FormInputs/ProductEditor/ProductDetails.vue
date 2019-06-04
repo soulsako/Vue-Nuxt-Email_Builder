@@ -27,6 +27,13 @@
       </v-layout>
     </v-container>
   </v-form>
+  <AlertMessage 
+    :value="alert.show" 
+    :type="alert.type"
+    :dismissible="true"
+   >
+    {{ alert.message }}
+  </AlertMessage>
 </div>
 </template>
 
@@ -45,7 +52,12 @@ import { mapGetters } from 'vuex'
         plus: [],
         imagePlus: [], 
         productOne: [], 
-        productTwo: []
+        productTwo: [], 
+        alert: {
+          show: false,
+          type: 'error',
+          message: ''
+        }
       }
     },
     computed: {
@@ -68,6 +80,10 @@ import { mapGetters } from 'vuex'
     methods: { 
       
       async submitPlu(){
+    
+        if(this.plus.length === 0){
+          return this.alert = {show: true, type: 'error', message: 'Please enter a PlU.'}
+        } 
         let productOne = [], 
             productTwo = [];
       //Get product data. Price, description etc.
@@ -87,6 +103,7 @@ import { mapGetters } from 'vuex'
         this.extractProducts(response.products, productOne, productTwo);
         
       })
+       
       const that = this;
       //Get product images. Returns an array of images (shot1, shot2, etc)
       const productImages = this.imagePlus.map(async function(plu) {
@@ -102,8 +119,9 @@ import { mapGetters } from 'vuex'
       .then(images => {
         this.extractProducts(images, productOne, productTwo);
         this.productOne = productOne;
-        this.productTwo = productTwo;
-        
+        if(productTwo.length > 0){
+          this.productTwo = productTwo;
+        }
       });
       this.plus = [];
       }, 

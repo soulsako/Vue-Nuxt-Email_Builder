@@ -25,32 +25,18 @@
 
               <v-divider />
 
-               <v-layout pa-3>
-                <v-flex xs12 sm12>
-                  <v-card flat>
-                    <v-container grid-list-md fluid>
-                      <v-layout row wrap>
-                        <v-flex
-                          v-for="(image, index) in getCurrCompImages"
-                          :key="index"
-                          xs4
-                          d-flex
-                          @click="onImageChange(image.src)"
-                        >
-                          <v-card flat tile class="d-flex">
-                            <v-img
-                              :src="image.src"
-                              :lazy-src="image.src"
-                              aspect-ratio="1"
-                              class="grey lighten-2"
-                            >
-                            </v-img>
-                          </v-card>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
-                  </v-card>
+              <v-layout app>
+                
+                <v-flex app>
+                  <ImageGrid @onImageClick="onImageClickHandler({src:$event, type: 'one'})" :images="getImagesOne"/>
                 </v-flex>
+               
+                <v-divider vertical />
+
+                <v-flex app v-if="getImagesTwo">
+                 <ImageGrid @onImageClick="onImageClickHandler({src:$event, type: 'two'})" :images="getImagesTwo"/>
+                </v-flex>
+              
               </v-layout>
 
             </v-flex>
@@ -82,7 +68,7 @@
 <script>
 import { mapGetters } from 'vuex'
   export default {
-
+    name: 'ProductModal',
     props: {
       dialog: {
         required: false, 
@@ -106,7 +92,8 @@ import { mapGetters } from 'vuex'
     computed: {
       ...mapGetters([
         'getCurrComp',
-        'getCurrCompImages' 
+        'getImagesOne', 
+        'getImagesTwo' 
       ])
     },
     methods: {
@@ -116,15 +103,16 @@ import { mapGetters } from 'vuex'
         }
         return name;
       }, 
-      onImageChange(src){
-        this.$store.commit('setNewImage', src);
+      onImageClickHandler(data){
+        this.$store.commit('setNewImage', data);
       }
     },
     updated(){
       //If the component selected has name starting with "two", show the second input
-      const twoString = this.getCurrComp.name.substring(0, 3).toLowerCase();
-      this.twoColumn = twoString === 'two' ? true : false
-
+      if(this.getCurrComp.name){
+        const twoString = this.getCurrComp.name.substring(0, 3).toLowerCase();
+        this.twoColumn = twoString === 'two' ? true : false
+      }
     }
   }
 </script>

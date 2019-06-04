@@ -12,6 +12,8 @@ import ProductDetails from '@/components/FormInputs/ProductEditor/ProductDetails
 import ProductStyles from '@/components/FormInputs/ProductEditor/ProductStyles.vue'
 import ProductEditor from '@/components/FormInputs/ProductEditor/ProductEditor.vue'
 import ProductModal from '@/components/Modal/ProductModal.vue'
+import ImageGrid from '@/components/UI/ImageGrid.vue'
+import AlertMessage from '@/components/UI/AlertMessage.vue'
 import { Sketch } from 'vue-color';
 
 
@@ -26,6 +28,8 @@ Vue.component('ProductDetails', ProductDetails);
 Vue.component('ProductStyles', ProductStyles);
 Vue.component('ProductEditor', ProductEditor);
 Vue.component('ProductModal', ProductModal);
+Vue.component('ImageGrid', ImageGrid);
+Vue.component('AlertMessage', AlertMessage);
 Vue.component('sketch-picker', Sketch);
 
 

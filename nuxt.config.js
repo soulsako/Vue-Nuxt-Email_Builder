@@ -3,6 +3,7 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
   mode: 'universal',
+  
 
   /*
   ** Headers of the page
