@@ -22,7 +22,7 @@
     "express": "^4.16.4",
     "interactjs": "^1.4.0-rc.13",
     "moment": "^2.24.0",
-    "mongoose": "^5.5.7",
+    "mongoose": "^5.7.5",
     "nuxt": "^2.4.0",
     "request": "^2.88.0",
     "vue-color": "^2.7.0",
