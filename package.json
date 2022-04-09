@@ -21,7 +21,7 @@
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "interactjs": "^1.4.0-rc.13",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.5.7",
     "nuxt": "^2.4.0",
     "request": "^2.88.0",
